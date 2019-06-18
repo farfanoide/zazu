@@ -20,3 +20,4 @@ script:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then npm run cucumber; fi
   - npm test
   - npm run release
+
