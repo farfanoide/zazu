@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/filename-case */
 const { After, Before } = require('cucumber')
 const jetpack = require('fs-jetpack')
 const path = require('path')

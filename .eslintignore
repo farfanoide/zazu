@@ -6,3 +6,4 @@ plugins
 docs
 dist
 app/lib/track/newrelic.js
+test/fixtures
