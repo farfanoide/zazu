@@ -47,11 +47,7 @@ const clone = (name, packagePath) => {
     if (status && jetpack.exists(packagePath)) return status
     return retry(`git clone [${name}]`, () => {
       const packageUrl = 'https://github.com/' + name + '.git'
-      return new Promise((resolve, reject) => {
-        mkdirp(path.dirname(packagePath), (err) => {
-          err ? reject(err) : resolve()
-        })
-      }).then(() => {
+      return mkdirp(path.dirname(packagePath)).then(() => {
         return git(['clone', packageUrl, packagePath]).catch((err) => {
           if (err.message.match(/already exists/i)) {
             return true// futher promises will resolve

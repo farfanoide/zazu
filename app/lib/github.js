@@ -38,11 +38,7 @@ const pull = (name, packagePath) => {
 }
 
 const download = (remote, local) => {
-  return new Promise((resolve, reject) => {
-    mkdirp(path.dirname(local), (err) => {
-      err ? reject(err) : resolve()
-    })
-  }).then(() => {
+  return mkdirp(path.dirname(local)).then(() => {
     return new Promise((resolve, reject) => {
       request(remote)
         .pipe(fs.createWriteStream(local))
