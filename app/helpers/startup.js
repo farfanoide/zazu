@@ -2,7 +2,7 @@ const AutoLaunch = require('auto-launch')
 const Datastore = require('nestdb')
 const { app } = require('electron')
 const path = require('path')
-const environment = require('../lib/env')
+const environment = require('../lib/environment')
 const logger = require('../lib/logger')
 
 const alreadyAddedToStartup = (database) => {

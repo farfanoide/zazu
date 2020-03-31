@@ -17,7 +17,9 @@ const autoResize = (dynamicWindow) => {
   }
 
   const updateHeight = () => {
-    if (!dynamicWindow) { return }
+    if (!dynamicWindow) {
+      return
+    }
     dynamicWindow.webContents.executeJavaScript('document.body.children[0].offsetHeight', (mainContentHeight) => {
       resize(mainContentHeight)
     })

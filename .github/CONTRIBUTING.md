@@ -3,7 +3,7 @@
 ### What's being worked on now
 
 The core team tracks what is currently being worked on on the [Zazu Project
-Board][Zazu Project Board].
+Board][zazu project board].
 
 ### Zazu Core
 
@@ -20,16 +20,15 @@ plugin][plugin page].
 
 ## Community
 
-You can find the community and core developers on [Gitter Chat][Gitter Chat].
+You can find the community and core developers on [Gitter Chat][gitter chat].
 
 ## Core Team Guidelines
 
 If you're part of Zazu's core team there are a few guidelines for you as well.
 
-When starting work, please update the [Roadmap][Roadmap] with your current task.
+When starting work, please update the [Roadmap][roadmap] with your current task.
 When you create a pull request, add a reviewer who is also on the core team. Add
-a label for which [semver][semver] number needs to be bumped, for example `major
-version`, `minor version` or `patch version`.
+a label for which [semver][semver] number needs to be bumped, for example `major version`, `minor version` or `patch version`.
 
 If you get added as a reviewer and you don't have time to get to it in the next
 day or two, feel free to comment or re-assign the ticket, things come up, we
@@ -40,17 +39,17 @@ assign it to yourself and take it from there.
 
 When making a review:
 
-* Verify semver label
-* Look at the code
-* Run code/docs locally
+- Verify semver label
+- Look at the code
+- Run code/docs locally
 
 Once approved of the change:
 
-* Merge the pull request
-* Publish the documentation if necessary (eg `npm run docs:publish`)
+- Merge the pull request
+- Publish the documentation if necessary (eg `npm run docs:publish`)
 
 [semver]: http://semver.org/
-[Roadmap]: https://github.com/tinytacoteam/zazu/projects/3
+[roadmap]: https://github.com/tinytacoteam/zazu/projects/3
 [help wanted tag]: https://github.com/tinytacoteam/zazu/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22
 [plugin page]: http://zazuapp.org/documentation/plugins/
-[Gitter Chat]: https://gitter.im/tinytacoteam/zazu
+[gitter chat]: https://gitter.im/tinytacoteam/zazu

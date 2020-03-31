@@ -14,7 +14,7 @@ const addToStartup = require('./helpers/startup')
 const { createMenu } = require('./helpers/menu')
 const about = require('./about')
 
-globalEmitter.on('showDebug', message => {
+globalEmitter.on('showDebug', (message) => {
   logger.log('info', 'opening debug page')
   windowHelper('debug', {
     width: 600,
@@ -29,20 +29,20 @@ globalEmitter.on('showDebug', message => {
   globalEmitter.emit('debuggerOpened')
 })
 
-globalEmitter.on('showAbout', message => {
+globalEmitter.on('showAbout', (message) => {
   logger.log('info', 'opening about page')
   about.show()
 })
 
-globalEmitter.on('openConfig', message => {
+globalEmitter.on('openConfig', (message) => {
   shell.openItem(configuration.profilePath)
 })
-globalEmitter.on('reloadConfig', message => {
+globalEmitter.on('reloadConfig', (message) => {
   app.relaunch()
   app.exit()
 })
 
-globalEmitter.on('pluginFreshRequire', pluginPath => {
+globalEmitter.on('pluginFreshRequire', (pluginPath) => {
   pluginFreshRequire(pluginPath)
 })
 
@@ -71,7 +71,7 @@ app.on('ready', function () {
   forceSingleInstance()
   addToStartup(configuration)
 
-  globalEmitter.on('registerHotkey', accelerator => {
+  globalEmitter.on('registerHotkey', (accelerator) => {
     if (!globalShortcut.isRegistered(accelerator)) {
       logger.log('verbose', 'registered a hotkey', { hotkey: accelerator })
       try {

@@ -45,26 +45,32 @@ const pull = (name, packagePath) => {
 const clone = (name, packagePath) => {
   return installStatus.get(name).then((status) => {
     if (status && jetpack.exists(packagePath)) return status
-    return retry(`git clone [${name}]`, () => {
-      const packageUrl = 'https://github.com/' + name + '.git'
-      return mkdirp(path.dirname(packagePath)).then(() => {
-        return git(['clone', packageUrl, packagePath]).catch((error) => {
-          if (error.message.match(/already exists/i)) {
-            return true// futher promises will resolve
-          } else if (error.message.match(/repository not found/i)) {
-            throw new Error('Package "' + name + '" does not exist on github')
-          } else {
-            throw error
-          }
-        })
-      }).then(() => {
-        return installStatus.set(name, 'cloned')
-      })
-    }, {
-      clean: () => {
-        return jetpack.removeAsync(packagePath)
+    return retry(
+      `git clone [${name}]`,
+      () => {
+        const packageUrl = 'https://github.com/' + name + '.git'
+        return mkdirp(path.dirname(packagePath))
+          .then(() => {
+            return git(['clone', packageUrl, packagePath]).catch((error) => {
+              if (error.message.match(/already exists/i)) {
+                return true // futher promises will resolve
+              } else if (error.message.match(/repository not found/i)) {
+                throw new Error('Package "' + name + '" does not exist on github')
+              } else {
+                throw error
+              }
+            })
+          })
+          .then(() => {
+            return installStatus.set(name, 'cloned')
+          })
       },
-    })
+      {
+        clean: () => {
+          return jetpack.removeAsync(packagePath)
+        },
+      },
+    )
   })
 }
 

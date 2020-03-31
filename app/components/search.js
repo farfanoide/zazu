@@ -31,7 +31,7 @@ const css = `
 `
 
 class Search extends React.Component {
-  constructor (properties) {
+  constructor(properties) {
     super(properties)
 
     this.state = {
@@ -127,23 +127,22 @@ class Search extends React.Component {
     menu.popup()
   }
 
-  renderMenuToggle = () => (
-    <button key="button" onClick={this.openMenu} className='menuToggle fa fa-cog' />
-  )
+  renderMenuToggle = () => <button key="button" onClick={this.openMenu} className="menuToggle fa fa-cog" />
 
-  render () {
+  render() {
     const { value } = this.props
 
     return (
       <div className="searchInputWrapper">
         <input
           key="input"
-          title='Search Zazu'
-          className='mousetrap'
+          title="Search Zazu"
+          className="mousetrap"
           ref={this.setReference}
-          type='text'
+          type="text"
           onChange={this.handleQueryChange}
-          value={value} />
+          value={value}
+        />
         {configuration.hideTrayItem ? this.renderMenuToggle() : null}
         <Style css={css} />
       </div>

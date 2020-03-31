@@ -4,5 +4,10 @@
   "tabWidth": 2,
   "trailingComma": "all",
   "printWidth": 120,
+  "arrowParens": "always",
+  "jsxBracketSameLine": true,
+  "jsxSingleQuote": false,
+  "quoteProps": "as-needed",
+  "bracketSpacing": true,
   "useTabs": false
 }

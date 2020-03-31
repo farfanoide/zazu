@@ -54,14 +54,14 @@ const appTemplate = [
 const trayTemplate = [
   {
     label: 'Toggle Zazu',
-    click () {
+    click() {
       globalEmitter.emit('toggleWindow')
     },
   },
   { type: 'separator' },
   {
     label: 'About Zazu',
-    click () {
+    click() {
       globalEmitter.emit('showAbout')
     },
   },
@@ -71,7 +71,7 @@ const trayTemplate = [
     submenu: [
       {
         label: 'Plugin Debugger',
-        click () {
+        click() {
           globalEmitter.emit('showDebug')
         },
       },

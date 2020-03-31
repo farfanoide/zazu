@@ -1,7 +1,7 @@
 const InputBlock = require('../inputBlock')
 
 class Keyword extends InputBlock {
-  constructor (data) {
+  constructor(data) {
     super(data)
     this.keyword = data.keyword || this.requiredField('keyword')
     this.title = data.title || this.requiredField('title')
@@ -9,7 +9,7 @@ class Keyword extends InputBlock {
     this.icon = data.icon
   }
 
-  respondsTo (input) {
+  respondsTo(input) {
     const longEnough = input.length > 2
     const partOfKeyword = this.keyword.includes(input)
     const respondsTo = longEnough && !!partOfKeyword
@@ -17,7 +17,7 @@ class Keyword extends InputBlock {
     return respondsTo
   }
 
-  search (input, environment = {}) {
+  search(input, environment = {}) {
     this.logger.log('info', 'Rendering keyword', { input })
     return Promise.resolve([
       {

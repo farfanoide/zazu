@@ -12,7 +12,7 @@ const LoadingSpinner = require('../components/loadingSpinner.js')
 const NoPlugins = require('../components/noplugins.js')
 
 class PluginWrapper extends React.Component {
-  constructor (properties, context) {
+  constructor(properties, context) {
     super(properties, context)
 
     this.state = {
@@ -39,30 +39,37 @@ class PluginWrapper extends React.Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     globalEmitter.on('updatePlugins', this.updatePackages)
     this.loadPackages()
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     globalEmitter.removeListener('updatePlugins', this.updatePackages)
   }
 
   updatePackages = () => {
-    return this.state.theme.update().then(() => {
-      return this.loadTheme()
-    }).then(() => {
-      return Promise.all(this.state.plugins.map((plugin) => {
-        return plugin.update()
-      }))
-    }).then(() => {
-      return this.loadPlugins()
-    }).then(() => {
-      notification.push({
-        title: 'Plugins reloaded',
-        message: 'Your plugins have been reloaded',
+    return this.state.theme
+      .update()
+      .then(() => {
+        return this.loadTheme()
       })
-    })
+      .then(() => {
+        return Promise.all(
+          this.state.plugins.map((plugin) => {
+            return plugin.update()
+          }),
+        )
+      })
+      .then(() => {
+        return this.loadPlugins()
+      })
+      .then(() => {
+        notification.push({
+          title: 'Plugins reloaded',
+          message: 'Your plugins have been reloaded',
+        })
+      })
   }
 
   clearResults = () => {
@@ -73,14 +80,16 @@ class PluginWrapper extends React.Component {
   }
 
   loadPackages = () => {
-    return this.loadTheme().then(() => {
-      return this.loadPlugins()
-    }).catch(() => {
-      notification.push({
-        title: 'No Plugins',
-        message: 'There are no plugins to load',
+    return this.loadTheme()
+      .then(() => {
+        return this.loadPlugins()
       })
-    })
+      .catch(() => {
+        notification.push({
+          title: 'No Plugins',
+          message: 'There are no plugins to load',
+        })
+      })
   }
 
   loadTheme = () => {
@@ -109,24 +118,32 @@ class PluginWrapper extends React.Component {
       this.context.logger.log('info', 'no plugins to load')
       throw new Error('no plugins to load')
     }
-    return Promise.all(plugins.map((pluginObject) => {
-      return pluginObject.load().then(() => {
-        const loaded = this.state.loaded + 1
-        this.setState({
-          loaded,
-        })
-        track.addPageAction('loadedPackage', {
-          packageType: 'plugin',
-          packageName: pluginObject.id,
-        })
-      }, reason => {
-        this.context.logger.log('error', 'failed to load plugin', reason)
-      })
-    })).then(() => {
-      this.context.logger.log('info', 'plugins are loaded')
-    }, reason => {
-      this.context.logger.log('error', 'plugins NOT loaded', reason)
-    })
+    return Promise.all(
+      plugins.map((pluginObject) => {
+        return pluginObject.load().then(
+          () => {
+            const loaded = this.state.loaded + 1
+            this.setState({
+              loaded,
+            })
+            track.addPageAction('loadedPackage', {
+              packageType: 'plugin',
+              packageName: pluginObject.id,
+            })
+          },
+          (reason) => {
+            this.context.logger.log('error', 'failed to load plugin', reason)
+          },
+        )
+      }),
+    ).then(
+      () => {
+        this.context.logger.log('info', 'plugins are loaded')
+      },
+      (reason) => {
+        this.context.logger.log('error', 'plugins NOT loaded', reason)
+      },
+    )
   }
 
   handleResetQuery = () => {
@@ -179,29 +196,26 @@ class PluginWrapper extends React.Component {
     this.context.logger.log('info', 'actioned result', truncateResult(result))
     const interaction = track.interaction()
     interaction.setName('actioned')
-    result.next().then(() => {
-      interaction.save()
-    }).catch(() => {
-      interaction.save()
-    })
+    result
+      .next()
+      .then(() => {
+        interaction.save()
+      })
+      .catch(() => {
+        interaction.save()
+      })
   }
 
-  render () {
+  render() {
     const { query, theme, results } = this.state
     const noPlugins = this.state.plugins.length === 0
     const stillLoading = this.state.loaded !== this.state.plugins.length
     if (stillLoading) {
-      return (
-        <LoadingSpinner
-          loaded={this.state.loaded}
-          total={this.state.plugins.length}/>
-      )
+      return <LoadingSpinner loaded={this.state.loaded} total={this.state.plugins.length} />
     }
 
     if (noPlugins) {
-      return (
-        <NoPlugins/>
-      )
+      return <NoPlugins />
     }
 
     return (
@@ -212,7 +226,8 @@ class PluginWrapper extends React.Component {
         scopeBlock={this.scopeBlock}
         handleResetQuery={this.handleResetQuery}
         handleQueryChange={this.handleQueryChange}
-        handleResultClick={this.handleResultClick}/>
+        handleResultClick={this.handleResultClick}
+      />
     )
   }
 }

@@ -1,5 +1,5 @@
 const { app, clipboard, dialog } = require('electron')
-const environment = require('./lib/env')
+const environment = require('./lib/environment')
 
 const items = [
   { name: 'App Environment', value: environment.name },
@@ -10,20 +10,25 @@ const items = [
 ]
 
 module.exports = {
-  show () {
-    const detail = items.map((item) => {
-      return item.name + ': ' + item.value
-    }).join('\n')
-    dialog.showMessageBox({
-      type: 'info',
-      message: 'Zazu App',
-      detail,
-      defaultId: 0,
-      buttons: ['Ok', 'Copy'],
-    }, (index) => {
-      if (index === 1) {
-        clipboard.writeText(detail)
-      }
-    })
+  show() {
+    const detail = items
+      .map((item) => {
+        return item.name + ': ' + item.value
+      })
+      .join('\n')
+    dialog.showMessageBox(
+      {
+        type: 'info',
+        message: 'Zazu App',
+        detail,
+        defaultId: 0,
+        buttons: ['Ok', 'Copy'],
+      },
+      (index) => {
+        if (index === 1) {
+          clipboard.writeText(detail)
+        }
+      },
+    )
   },
 }

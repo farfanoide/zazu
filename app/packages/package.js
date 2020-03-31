@@ -8,7 +8,7 @@ const notification = require('../lib/notification')
 const retry = require('../lib/retry')
 
 class Package {
-  constructor (url) {
+  constructor(url) {
     this.path = path.join(configuration.pluginDir, url)
     this.url = url
     this.clone = clone
@@ -16,7 +16,7 @@ class Package {
     this.logger = logger.bindMeta({ plugin: this.url })
   }
 
-  load () {
+  load() {
     return this.download()
       .then(this.check)
       .then(async () => {
@@ -49,7 +49,7 @@ class Package {
             () =>
               jetpack
                 .existsAsync(path.join(this.path, 'zazu.json'))
-                .then(result =>
+                .then((result) =>
                   result === 'file' ? resolve() : reject(new Error(`result of jetpack.existsAsync is ${result}`)),
                 ),
             500,
@@ -58,7 +58,7 @@ class Package {
     )
   }
 
-  update () {
+  update() {
     if (!jetpack.exists(this.path)) {
       return Promise.reject(new Error('Package' + this.url + ' does not exist'))
     }
@@ -66,7 +66,7 @@ class Package {
     return this.pull(this.url, this.path)
   }
 
-  download () {
+  download() {
     return this.clone(this.url, this.path)
   }
 }

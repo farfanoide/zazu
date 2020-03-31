@@ -4,12 +4,12 @@ const Template = require('../../lib/template')
 const Block = require('../block')
 
 class OpenInBrowser extends Block {
-  constructor (data) {
+  constructor(data) {
     super(data)
     this.url = data.url || '{value}'
   }
 
-  call (state) {
+  call(state) {
     const url = Template.compile(this.url, {
       value: String(state.value),
     })

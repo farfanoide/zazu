@@ -3,7 +3,7 @@ const path = require('path')
 const { parse } = require('relaxed-json')
 
 class Configuration {
-  constructor () {
+  constructor() {
     const cwd = process.cwd()
     const portableHome = path.join(cwd, 'portable')
     if (require('fs').existsSync(portableHome)) {
@@ -26,7 +26,7 @@ class Configuration {
     this.height = 400
   }
 
-  load () {
+  load() {
     if (this.loaded) return
 
     if (!jetpack.exists(this.profilePath)) {

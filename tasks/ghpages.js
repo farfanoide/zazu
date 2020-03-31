@@ -16,19 +16,19 @@ const commitSha = () => {
   return execSync('git rev-parse HEAD').toString()
 }
 
-const setupDynamicConfig = documentationConfigFile => {
+const setupDynamicConfig = (documentationConfigFile) => {
   fs.writeFileSync(documentationConfigFile, `currentCommitSha: ${commitSha()}\n`, { flag: 'a' })
   fs.writeFileSync(documentationConfigFile, `currentAppVersion: ${appVersion()}\n`, { flag: 'a' })
 }
 
-const cleanupDynamicConfig = documentationConfigFile => {
+const cleanupDynamicConfig = (documentationConfigFile) => {
   const data = fs.readFileSync(documentationConfigFile)
   fs.writeFileSync(
     documentationConfigFile,
     data
       .toString()
       .split('\n')
-      .filter(line => {
+      .filter((line) => {
         return !line.match(/currentCommitSha|currentAppVersion/)
       })
       .join('\n')
@@ -42,7 +42,7 @@ gulp.task('ghpages', () => {
   setupDynamicConfig(documentationConfigFile)
   console.log('start publishing')
   return new Promise((resolve, reject) => {
-    ghpages.publish(documentationDirectory, { dotfiles: true }, error => {
+    ghpages.publish(documentationDirectory, { dotfiles: true }, (error) => {
       if (error) {
         console.error(error)
         reject(error)

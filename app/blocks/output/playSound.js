@@ -3,13 +3,13 @@ const Template = require('../../lib/template')
 const Block = require('../block')
 
 class PlaySound extends Block {
-  constructor (data) {
+  constructor(data) {
     super(data)
     this.file = data.file
     this.cwd = data.cwd
   }
 
-  call (state, environment = {}) {
+  call(state, environment = {}) {
     const file = Template.compile(this.file, {
       value: String(state.value),
     })

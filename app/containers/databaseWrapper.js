@@ -9,7 +9,7 @@ const track = require('../lib/track')
 const resultSorter = require('../transforms/resultSorter')
 
 class DatabaseWrapper extends React.Component {
-  constructor (properties, context) {
+  constructor(properties, context) {
     super(properties, context)
 
     const { configuration } = this.context
@@ -20,7 +20,7 @@ class DatabaseWrapper extends React.Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.state.database.find({}).exec((error, clickedResults) => {
       if (error) return
       this.setState({
@@ -47,7 +47,7 @@ class DatabaseWrapper extends React.Component {
     this.props.handleResultClick(result)
   }
 
-  render () {
+  render() {
     const { handleQueryChange, handleResetQuery, query, theme, results, scopeBlock } = this.props
     return (
       <Zazu

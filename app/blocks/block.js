@@ -3,7 +3,7 @@ const cuid = require('cuid')
 const logger = require('../lib/logger')
 
 class Block {
-  constructor (data) {
+  constructor(data) {
     this.pluginId = data.pluginId
     this.type = data.type
     this.id = data.id || cuid()
@@ -11,7 +11,7 @@ class Block {
     this.logger = logger.bindMeta({ plugin: this.pluginId, block: this.id })
   }
 
-  requiredField (fieldName) {
+  requiredField(fieldName) {
     const blockName = this.constructor.name
     this.logger.log('error', `Field "${fieldName}" is required.`, {
       fieldName,
@@ -19,7 +19,7 @@ class Block {
     })
   }
 
-  _ensurePromise (value) {
+  _ensurePromise(value) {
     if (!(value instanceof Promise)) {
       this.logger.log('error', 'Block did not return a Promise')
       return Promise.resolve()
@@ -27,7 +27,7 @@ class Block {
     return value
   }
 
-  call (state) {
+  call(state) {
     return state.next()
   }
 }

@@ -5,7 +5,7 @@ const path = require('path')
 const Screens = require('../../lib/screens')
 
 class Preview extends Block {
-  constructor (data) {
+  constructor(data) {
     super(data)
     this.message = data.message || '{value}'
     this.screens = Screens.getInstance({
@@ -13,7 +13,7 @@ class Preview extends Block {
     })
   }
 
-  call (state, environment = {}) {
+  call(state, environment = {}) {
     const win = windowHelper('preview-block', {
       show: false,
       width: 700,
@@ -34,9 +34,12 @@ class Preview extends Block {
       win.setPosition(position.x, position.y)
     }
     win.webContents.on('did-finish-load', () => {
-      win.webContents.send('message', Template.compile(this.message, {
-        value: String(state.value),
-      }))
+      win.webContents.send(
+        'message',
+        Template.compile(this.message, {
+          value: String(state.value),
+        }),
+      )
     })
     return new Promise((resolve) => {
       win.on('blur', () => {

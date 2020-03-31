@@ -13,7 +13,7 @@ class ConfigWrapper extends React.Component {
     }
   }
 
-  render () {
+  render() {
     return this.props.children
   }
 }

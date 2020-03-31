@@ -5,7 +5,7 @@ const InputBlock = require('../inputBlock')
 const truncateResult = require('../../lib/truncateResult')
 
 class PrefixScript extends InputBlock {
-  constructor (data) {
+  constructor(data) {
     super(data)
     this.prefix = data.prefix || this.requiredField('prefix')
     this.args = data.args || this.requiredField('args')
@@ -22,7 +22,7 @@ class PrefixScript extends InputBlock {
     }
   }
 
-  respondsTo (input) {
+  respondsTo(input) {
     if (!this.script) {
       this.logger.error('Plugin failed to load', this.loadError)
       return false
@@ -54,12 +54,12 @@ class PrefixScript extends InputBlock {
     return respondsTo
   }
 
-  query (input) {
+  query(input) {
     const respondsTo = this.respondsTo(input)
     return respondsTo ? respondsTo[1] || '' : ''
   }
 
-  search (input, environment = {}) {
+  search(input, environment = {}) {
     const query = this.query(input)
     this.logger.log('verbose', 'Executing Script', { query })
     return new Promise((resolve, reject) => {
@@ -71,13 +71,13 @@ class PrefixScript extends InputBlock {
       .then(() => {
         return this._ensurePromise(this.script(query, environment))
       })
-      .then(results => {
+      .then((results) => {
         this.logger.log('info', 'Script Results', {
           results: Array.isArray(results) ? results.map(truncateResult) : results,
         })
-        return this._validateResults(results.map(result => Object.assign({}, result, { blockRank: 3 })))
+        return this._validateResults(results.map((result) => Object.assign({}, result, { blockRank: 3 })))
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.message === 'Debounced') {
           this.logger.log('verbose', error.message, { query, error })
         } else {

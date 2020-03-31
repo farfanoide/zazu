@@ -4,12 +4,14 @@ const manager = (fn, warmupFn, cooldownFn) => {
   const increment = () => count++ === 0 && warmupFn()
   return function () {
     increment()
-    return fn(...arguments).then(() => {
-      decrement()
-    }).catch((error) => {
-      decrement()
-      throw error
-    })
+    return fn(...arguments)
+      .then(() => {
+        decrement()
+      })
+      .catch((error) => {
+        decrement()
+        throw error
+      })
   }
 }
 

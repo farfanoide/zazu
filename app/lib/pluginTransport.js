@@ -2,7 +2,7 @@ const Transport = require('winston-transport')
 const globalEmitter = require('./globalEmitter')
 
 class PluginLogger extends Transport {
-  constructor (options) {
+  constructor(options) {
     super(options)
     this.name = 'pluginLogger'
     this.level = options.level || 'verbose'
@@ -22,7 +22,7 @@ class PluginLogger extends Transport {
     })
   }
 
-  log (level, message, meta, callback) {
+  log(level, message, meta, callback) {
     // only log plugin error when normal user won't be affected
     if ((this.devtoolOpened === true || this.mainWindowOpened === false) && meta.plugin) {
       globalEmitter.emit('pluginLog', {

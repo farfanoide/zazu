@@ -6,8 +6,8 @@
 
 ### Versions
 
-* Zazu:
-* OS:
-* GIT:
+- Zazu:
+- OS:
+- GIT:
 
 Please, include a link to gist of most applicable `~/.zazu/log/` file.

@@ -4,7 +4,7 @@ const electron = require('electron')
 const Block = require('../block')
 
 class UserScript extends Block {
-  constructor (data) {
+  constructor(data) {
     super(data)
     try {
       const plugin = electron.remote.require(path.join(data.cwd, data.script))
@@ -18,19 +18,21 @@ class UserScript extends Block {
     }
   }
 
-  call (state, environment = {}) {
+  call(state, environment = {}) {
     if (!this.script) {
       this.logger.error('Plugin failed to load', this.loadError)
       return Promise.resolve()
     }
     this.logger.log('verbose', 'Executing Script', { value: state.value })
-    return this._ensurePromise(this.script(state.value, environment)).then((output) => {
-      state.value = output
-      this.logger.log('info', 'User Script results', { value: state.value })
-      return state.next()
-    }).catch((error) => {
-      this.logger.error('User Script failed', { value: state.value, error })
-    })
+    return this._ensurePromise(this.script(state.value, environment))
+      .then((output) => {
+        state.value = output
+        this.logger.log('info', 'User Script results', { value: state.value })
+        return state.next()
+      })
+      .catch((error) => {
+        this.logger.error('User Script failed', { value: state.value, error })
+      })
   }
 }
 

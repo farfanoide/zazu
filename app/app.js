@@ -12,6 +12,6 @@ ReactDOM.render(
 )
 
 // Catch `esc` or `enter` to avoid alert beep.
-document.body.addEventListener('keydown', error => {
+document.body.addEventListener('keydown', (error) => {
   return error.key !== 'Enter' && error.key !== 'Escape'
 })

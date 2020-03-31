@@ -20,7 +20,7 @@ const homeProfile = path.join(homeDirectory, '.zazurc.json')
 setDefaultTimeout(60 * 1000)
 
 class World {
-  profile (name) {
+  profile(name) {
     this.profileType = name
     if (this.profileType === 'calculator') {
       jetpack.copy(calcProfile, homeProfile, { overwrite: true })
@@ -38,35 +38,35 @@ class World {
     return Promise.resolve()
   }
 
-  async open () {
+  async open() {
     await this.app.start()
     const time = this.profileType === 'calculator' ? 50 * 1000 : 5 * 1000
     return wait(time) // give it time to load plugins
   }
 
-  isWindowVisible () {
+  isWindowVisible() {
     return this.app.browserWindow.isVisible()
   }
 
-  hasResults () {
+  hasResults() {
     return this.app.client.isExisting('.results')
   }
 
-  accessibility () {
+  accessibility() {
     return this.app.client.auditAccessibility()
   }
 
-  updatePlugins () {
+  updatePlugins() {
     return this.app.webContents.send('updatePlugins').then(() => {
       return wait(10 * 1000) // give it time to update the plugin
     })
   }
 
-  getQuery () {
+  getQuery() {
     return this.app.client.getValue('input')
   }
 
-  async type (input) {
+  async type(input) {
     await wait(500)
     for (const char of input) {
       await this.hitKey(char)
@@ -74,16 +74,16 @@ class World {
     await wait(500)
   }
 
-  async showWindow () {
+  async showWindow() {
     await this.hitKey('space', 'shift')
     await wait(500)
   }
 
-  hideWindow () {
+  hideWindow() {
     return this.hitKey('space', 'shift')
   }
 
-  hitKey (key, modifier) {
+  hitKey(key, modifier) {
     if (os.type() === 'Darwin' && !isTravis) {
       const keyForAppleScript = key.length === 1 ? `\\"${key}\\"` : key
       if (modifier) {
@@ -109,46 +109,46 @@ class World {
     }
   }
 
-  close () {
+  close() {
     if (this.app) {
       return this.app.stop()
     }
     return Promise.resolve()
   }
 
-  clickActiveResult () {
+  clickActiveResult() {
     return this.app.client.click('li.active')
   }
 
-  getActiveHeader () {
+  getActiveHeader() {
     return this.app.client.getText('li.active h2')
   }
 
-  getResults () {
+  getResults() {
     return this.app.client.getText('.results')
   }
 
-  getResultItems () {
-    return this.app.client.getHTML('.results').then(results => {
+  getResultItems() {
+    return this.app.client.getHTML('.results').then((results) => {
       return $(results).find('li')
     })
   }
 
-  readClipboard () {
+  readClipboard() {
     return this.app.electron.clipboard.readText()
   }
 }
 
-const wait = time => {
-  return new Promise(resolve => {
+const wait = (time) => {
+  return new Promise((resolve) => {
     setTimeout(resolve, time)
   })
 }
 
 const eventually = (func, expectedValue) => {
-  const assert = actualValue => {
+  const assert = (actualValue) => {
     if (actualValue !== expectedValue) {
-      throw new Error('Values didn\'t match')
+      throw new Error("Values didn't match")
     }
   }
   return new Promise((resolve, reject) => {
@@ -234,7 +234,7 @@ When('I eventually click on the active result', function () {
 })
 
 Then('my clipboard contains {string}', function (expected, callback) {
-  this.readClipboard().then(actual => {
+  this.readClipboard().then((actual) => {
     if (actual === expected) {
       callback()
     } else {
@@ -253,7 +253,7 @@ Then('the search window is visible', function () {
 
 Then('I have {int} result(s)', function (expected) {
   return eventually(() => {
-    return this.getResultItems().then(items => items.length)
+    return this.getResultItems().then((items) => items.length)
   }, Number.parseInt(expected, 10))
 })
 
@@ -291,7 +291,7 @@ Then('the active result contains {string}', function (header) {
 })
 
 Then('I have no accessibility warnings', function () {
-  return this.accessibility().then(response => {
+  return this.accessibility().then((response) => {
     if (response.results.length !== 0) {
       throw new Error('You have accessibility issues')
     }
@@ -299,7 +299,7 @@ Then('I have no accessibility warnings', function () {
 })
 
 Then('the results contain {string}', function (subset, callback) {
-  this.getResults().then(resultText => {
+  this.getResults().then((resultText) => {
     if (resultText.match(subset)) {
       callback()
     } else {

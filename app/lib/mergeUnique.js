@@ -4,8 +4,5 @@ module.exports = (needle, list) => {
     const index = haystack.indexOf(needle)
     haystack.splice(index, 1)
   }
-  return [
-    needle,
-    ...haystack,
-  ]
+  return [needle, ...haystack]
 }

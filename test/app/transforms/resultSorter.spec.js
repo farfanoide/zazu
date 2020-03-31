@@ -47,12 +47,7 @@ describe('ResultSorter', () => {
       const sortedNames = resultSorter.sort(results, clicked).map((item) => {
         return item.name
       })
-      expect(sortedNames).to.deep.equal([
-        'taco',
-        'burrito',
-        'quesadilla',
-        'cheeseburger',
-      ])
+      expect(sortedNames).to.deep.equal(['taco', 'burrito', 'quesadilla', 'cheeseburger'])
     })
   })
 

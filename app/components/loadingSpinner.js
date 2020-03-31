@@ -19,10 +19,12 @@ const LoadingSpinner = ({ loaded, total }) => {
   `
 
   return (
-    <div className='container'>
-      <h2 className='loader'>Zazu is loading...</h2>
-      <h3 className='loader'>{loaded} of {total} plugins are loaded</h3>
-      <Style css={css}/>
+    <div className="container">
+      <h2 className="loader">Zazu is loading...</h2>
+      <h3 className="loader">
+        {loaded} of {total} plugins are loaded
+      </h3>
+      <Style css={css} />
     </div>
   )
 }

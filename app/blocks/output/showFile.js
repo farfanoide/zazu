@@ -4,13 +4,13 @@ const os = require('os')
 const Block = require('../block')
 
 class ShowFile extends Block {
-  constructor (data) {
+  constructor(data) {
     super(data)
     this.script = data.script
     this.cwd = data.cwd
   }
 
-  call (state, environment = {}) {
+  call(state, environment = {}) {
     const fullPath = state.value.replace(/^~/, os.homedir())
     this.logger.log('info', 'Showing File', { fullPath })
     shell.showItemInFolder(fullPath)

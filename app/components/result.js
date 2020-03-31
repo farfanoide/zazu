@@ -10,13 +10,15 @@ class Result extends React.Component {
     this.props.handleTab(this.props.value)
   }
 
-  shouldComponentUpdate (nextProperties) {
-    return nextProperties.active !== this.props.active ||
+  shouldComponentUpdate(nextProperties) {
+    return (
+      nextProperties.active !== this.props.active ||
       nextProperties.value !== this.props.value ||
       nextProperties.onClick !== this.props.onClick
+    )
   }
 
-  componentDidUpdate () {
+  componentDidUpdate() {
     if (this.props.active) {
       const list = this.el.parentElement
       const listTop = list.offsetTop
@@ -40,13 +42,13 @@ class Result extends React.Component {
     const isFontAwesome = value.icon.startsWith('fa') && !value.icon.includes('.')
 
     if (isFontAwesome) {
-      return <i className={`icon fa ${value.icon}`} aria-hidden='true'/>
+      return <i className={`icon fa ${value.icon}`} aria-hidden="true" />
     } else {
-      return <img className='icon' src={value.icon} role='presentation' alt=''/>
+      return <img className="icon" src={value.icon} role="presentation" alt="" />
     }
   }
 
-  render () {
+  render() {
     const { active, value } = this.props
 
     return (
@@ -58,7 +60,7 @@ class Result extends React.Component {
         onFocus={this.handleFocus}>
         {this.renderIcon()}
         <h2>{value.title}</h2>
-        { value.subtitle && <h3>{value.subtitle}</h3> }
+        {value.subtitle && <h3>{value.subtitle}</h3>}
       </li>
     )
   }

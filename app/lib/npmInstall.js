@@ -12,34 +12,37 @@ const freshRequire = require('./pluginFreshRequire')
  *
  * On failure, returns a rejected promise, so `retry` runs it again.
  */
-const npmInstall = cooldown((name, packagePath) => {
-  return retry(`npm install [${name}]`, () => {
-    const packageFile = path.join(packagePath, 'package.json')
-    if (!jetpack.exists(packageFile)) {
-      return installStatus.set(name, 'nopackage')
-    }
-    const package_ = jetpack.read(packageFile, 'json')
-    const dependencies = package_.dependencies
-    if (!dependencies) {
-      return installStatus.set(name, 'nodeps')
-    }
-    const packages = Object.keys(dependencies).map((packageName) => {
-      const packageVersion = dependencies[packageName]
-      return packageName + '@' + packageVersion
-    })
-    return new Promise((resolve, reject) => {
-      const npm = require('npm')
-      npm.load({ production: true, optional: false, audit: false, 'strict-ssl': false }, npmError => {
-        if (npmError) return reject(npmError)
-        npm.commands.install(packagePath, packages, error => {
-          if (error) return reject(error)
-          installStatus.set(name, 'installed').then(resolve)
+const npmInstall = cooldown(
+  (name, packagePath) => {
+    return retry(`npm install [${name}]`, () => {
+      const packageFile = path.join(packagePath, 'package.json')
+      if (!jetpack.exists(packageFile)) {
+        return installStatus.set(name, 'nopackage')
+      }
+      const package_ = jetpack.read(packageFile, 'json')
+      const dependencies = package_.dependencies
+      if (!dependencies) {
+        return installStatus.set(name, 'nodeps')
+      }
+      const packages = Object.keys(dependencies).map((packageName) => {
+        const packageVersion = dependencies[packageName]
+        return packageName + '@' + packageVersion
+      })
+      return new Promise((resolve, reject) => {
+        const npm = require('npm')
+        npm.load({ production: true, optional: false, audit: false, 'strict-ssl': false }, (npmError) => {
+          if (npmError) return reject(npmError)
+          npm.commands.install(packagePath, packages, (error) => {
+            if (error) return reject(error)
+            installStatus.set(name, 'installed').then(resolve)
+          })
         })
       })
     })
-  })
-}, () => {
-  return freshRequire('npm')
-})
+  },
+  () => {
+    return freshRequire('npm')
+  },
+)
 
 module.exports = npmInstall

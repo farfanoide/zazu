@@ -2,13 +2,13 @@ const globalEmitter = require('../../lib/globalEmitter')
 const ExternalBlock = require('../externalBlock')
 
 class Hotkey extends ExternalBlock {
-  constructor (data, options) {
+  constructor(data, options) {
     super(data, options)
     this.connections = data.connections || []
     this.hotkey = options[this.id] || data.hotkey
   }
 
-  start () {
+  start() {
     globalEmitter.emit('registerHotkey', this.hotkey)
     globalEmitter.on('triggerHotkey', (accelerator) => {
       if (this.hotkey === accelerator) {
@@ -18,7 +18,7 @@ class Hotkey extends ExternalBlock {
     })
   }
 
-  handle () {
+  handle() {
     this.emit('actioned')
   }
 }

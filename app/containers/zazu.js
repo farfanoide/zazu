@@ -7,7 +7,7 @@ const Results = require('../components/results')
 const globalEmitter = require('../lib/globalEmitter')
 
 class Zazu extends React.Component {
-  constructor (properties) {
+  constructor(properties) {
     super(properties)
 
     this.state = {
@@ -16,12 +16,12 @@ class Zazu extends React.Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     globalEmitter.on('hideWindow', this.handleResetQuery)
     globalEmitter.on('showWindow', this.sendEmptyQuery)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     globalEmitter.removeListener('hideWindow', this.handleResetQuery)
     globalEmitter.removeListener('showWindow', this.sendEmptyQuery)
   }
@@ -38,18 +38,18 @@ class Zazu extends React.Component {
     this.props.handleResetQuery()
   }
 
-  handleUpdateActiveIndex = index => {
+  handleUpdateActiveIndex = (index) => {
     this.setState({
       activeIndex: index,
     })
   }
 
-  handleResultClick = result => {
+  handleResultClick = (result) => {
     globalEmitter.emit('hideWindow')
     this.props.handleResultClick(result)
   }
 
-  handleQueryChange = query => {
+  handleQueryChange = (query) => {
     const queryNotChanged = query !== this.state.previousQuery
     const activeIndex = queryNotChanged ? 0 : this.state.activeIndex
     if (query !== this.state.previousQuery) {
@@ -59,7 +59,7 @@ class Zazu extends React.Component {
     this.setState({ activeIndex })
   }
 
-  render () {
+  render() {
     const { query, results, theme } = this.props
     return (
       <div style={{ maxHeight: 400, display: 'flex', flexDirection: 'column' }}>

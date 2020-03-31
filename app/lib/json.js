@@ -3,7 +3,7 @@ const https = require('https')
 const http = require('http')
 const app = electron.app || electron.remote.app
 
-module.exports = options_ => {
+module.exports = (options_) => {
   const options = Object.assign({}, options_, {
     headers: {
       'User-Agent': `ZazuApp v${app.getVersion()}`,
@@ -12,19 +12,19 @@ module.exports = options_ => {
   return new Promise((resolve, reject) => {
     const library = options_.https ? https : http
     library
-      .get(options, result => {
+      .get(options, (result) => {
         var chunks = []
-        result.on('data', chunk => {
+        result.on('data', (chunk) => {
           chunks.push(chunk.toString())
         })
         result.on('end', () => {
           resolve(JSON.parse(chunks.join('')))
         })
-        result.on('error', error => {
+        result.on('error', (error) => {
           reject(error)
         })
       })
-      .on('error', error => {
+      .on('error', (error) => {
         reject(error)
       })
   })

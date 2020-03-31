@@ -25,12 +25,12 @@ class Results extends React.PureComponent {
     this.props.handleUpdateActiveIndex(index)
   }
 
-  handleTab = result => {
+  handleTab = (result) => {
     const index = this.props.values.indexOf(result)
     this.props.handleUpdateActiveIndex(index)
   }
 
-  componentDidMount () {
+  componentDidMount() {
     keyboard.bind('results', ['ctrl+p', 'ctrl+k', 'up'], () => {
       this.moveUp()
     })
@@ -46,7 +46,7 @@ class Results extends React.PureComponent {
     })
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     keyboard.unbind('results')
   }
 
@@ -69,7 +69,7 @@ class Results extends React.PureComponent {
     ]
   }
 
-  render () {
+  render() {
     const { values, handleResultClick, activeIndex } = this.props
     if (values.length === 0) {
       return null

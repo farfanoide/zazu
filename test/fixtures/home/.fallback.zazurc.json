@@ -3,10 +3,6 @@
   "theme": "tinytacoteam/zazu-fixture",
   "disableAnalytics": true,
   "blur": false,
-  "plugins": [
-    "tinytacoteam/zazu-fallback"
-  ],
-  "comments": [
-    "zazu-fixtures and zazu-fallback is installed"
-  ]
+  "plugins": ["tinytacoteam/zazu-fallback"],
+  "comments": ["zazu-fixtures and zazu-fallback is installed"]
 }

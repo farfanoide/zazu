@@ -8,21 +8,21 @@ const logger = require('./logger')
 var self = {
   _latestVersion: null,
 
-  queueUpdate () {
+  queueUpdate() {
     const thirtySeconds = 1000 * 30
     setTimeout(() => {
       self.check()
     }, thirtySeconds)
   },
 
-  stallUpdate () {
+  stallUpdate() {
     const oneDay = 1000 * 60 * 60 * 24
     setTimeout(() => {
       self.check()
     }, oneDay)
   },
 
-  latestVersion () {
+  latestVersion() {
     return new Promise((resolve, reject) => {
       if (self._latestVersion) {
         return resolve(self._latestVersion)
@@ -32,25 +32,25 @@ var self = {
         host: 'zazuapp.org',
         path: '/api/version.json',
       })
-        .then(body => {
+        .then((body) => {
           resolve(body.version || app.getVersion())
         })
-        .catch(error => {
+        .catch((error) => {
           reject(new Error(`Got error: ${error.message}`))
         })
     })
   },
 
-  needsUpdate () {
-    return self.latestVersion().then(newestVersion => {
+  needsUpdate() {
+    return self.latestVersion().then((newestVersion) => {
       return semver.satisfies(newestVersion, `>${app.getVersion()}`) && newestVersion
     })
   },
 
-  check (manualUpdate) {
+  check(manualUpdate) {
     self
       .needsUpdate()
-      .then(updateVersion => {
+      .then((updateVersion) => {
         if (updateVersion) {
           logger.log('info', 'needs zazu software update', { updateVersion })
           globalEmitter.emit('showWindow')
@@ -64,7 +64,7 @@ var self = {
               message: 'Zazu ' + updateVersion + ' is available for download!',
               detail: 'Click download to get the newest version of Zazu!',
             },
-            response => {
+            (response) => {
               if (response === 1) {
                 logger.log('info', 'I need it now!', { updateVersion })
                 shell.openExternal('http://zazuapp.org/download/')
@@ -85,7 +85,7 @@ var self = {
           self.stallUpdate()
         }
       })
-      .catch(error => {
+      .catch((error) => {
         logger.error(error)
       })
   },

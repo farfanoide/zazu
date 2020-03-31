@@ -7,7 +7,7 @@ class NoPlugins extends React.Component {
     shell.openExternal('http://zazuapp.org/plugins/')
   }
 
-  render () {
+  render() {
     const css = `
     body {
       background-color: #5CC7B2;

@@ -65,10 +65,10 @@ submit it to the [plugins](http://zazuapp.org/plugins/) gallery!
 
 As you might expect:
 
-~~~
+```shell
 npm install
 npm start
-~~~
+```
 
 If you enable debug mode it will make it so Zazu won't hide and the dev tools
 will open by default. You can enable debug mode by adding a `debug` flag to
@@ -76,7 +76,7 @@ will open by default. You can enable debug mode by adding a `debug` flag to
 
 If `blur` flag is `false`, then Zazu won't hide when it lost focus.
 
-~~~ javascript
+```javascript
 {
   "debug": true,
   "blur": false,
@@ -84,7 +84,7 @@ If `blur` flag is `false`, then Zazu won't hide when it lost focus.
   "theme": "tinytacoteam/zazu-playful-theme",
   "plugins": []
 }
-~~~
+```
 
 ## Deployment
 

@@ -27,11 +27,14 @@ describe('Configuration', () => {
 
     describe('given a configuration file', () => {
       beforeEach(() => {
-        jetpack.write(configuration.profilePath, JSON.stringify({
-          hotkey: 'alt+space',
-          theme: 'tinytacoteam/dark-purple',
-          plugins: ['abc'],
-        }))
+        jetpack.write(
+          configuration.profilePath,
+          JSON.stringify({
+            hotkey: 'alt+space',
+            theme: 'tinytacoteam/dark-purple',
+            plugins: ['abc'],
+          }),
+        )
         expect(jetpack.exists(configuration.profilePath)).to.be.ok
         configuration.load()
       })

@@ -4,7 +4,7 @@ const jetpack = require('fs-jetpack')
 const util = require('util')
 
 const configuration = require('./configuration')
-const environment = require('./env')
+const environment = require('./environment')
 
 jetpack.dir(configuration.logDir)
 

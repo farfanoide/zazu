@@ -4,22 +4,22 @@ const globalEmitter = require('../lib/globalEmitter')
 const truncateResult = require('../lib/truncateResult')
 
 class InputBlock extends Block {
-  constructor (data) {
+  constructor(data) {
     super(data)
     this.pluginId = data.pluginId
     this.isScoped = null
     this.debounce = data.debounce || 100
   }
 
-  isActive () {
+  isActive() {
     return this.isScoped !== false
   }
 
-  setScoped (value) {
+  setScoped(value) {
     this.isScoped = value
   }
 
-  _validateResults (results) {
+  _validateResults(results) {
     if (!Array.isArray(results)) {
       this.logger.log('error', 'results must be an array', {
         results,
@@ -38,7 +38,7 @@ class InputBlock extends Block {
     return results
   }
 
-  call (state) {
+  call(state) {
     setImmediate(() => {
       globalEmitter.emit('showWindow', this.pluginId, this.id)
     })

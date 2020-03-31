@@ -5,7 +5,7 @@ const InputBlock = require('../inputBlock')
 const truncateResult = require('../../lib/truncateResult')
 
 class RootScript extends InputBlock {
-  constructor (data) {
+  constructor(data) {
     super(data)
     try {
       const plugin = electron.remote.require(path.join(data.cwd, data.script))
@@ -19,7 +19,7 @@ class RootScript extends InputBlock {
     }
   }
 
-  respondsTo (input, environment = {}) {
+  respondsTo(input, environment = {}) {
     if (!this.script) {
       this.logger.error('Plugin failed to load', this.loadError)
       return false
@@ -29,11 +29,11 @@ class RootScript extends InputBlock {
     return respondsTo
   }
 
-  query (input) {
+  query(input) {
     return input
   }
 
-  search (input, environment = {}) {
+  search(input, environment = {}) {
     const query = this.query(input)
     this.logger.log('verbose', 'Executing Script', { query })
     return new Promise((resolve, reject) => {
@@ -41,18 +41,23 @@ class RootScript extends InputBlock {
         timeout === this.timeout ? resolve() : reject(new Error('Debounced'))
       }, this.debounce)
       this.timeout = timeout
-    }).then(() => {
-      return this._ensurePromise(this.script.search(query, environment))
-    }).then((results) => {
-      this.logger.log('info', 'Script Results', { results: (Array.isArray(results) ? results.map(truncateResult) : results) })
-      return this._validateResults(results.map((result) => Object.assign({}, result, { blockRank: 1 })))
-    }).catch((error) => {
-      if (error.message === 'Debounced') {
-        this.logger.log('verbose', error.message, { query, error })
-      } else {
-        this.logger.error('Script failed', { query, error })
-      }
     })
+      .then(() => {
+        return this._ensurePromise(this.script.search(query, environment))
+      })
+      .then((results) => {
+        this.logger.log('info', 'Script Results', {
+          results: Array.isArray(results) ? results.map(truncateResult) : results,
+        })
+        return this._validateResults(results.map((result) => Object.assign({}, result, { blockRank: 1 })))
+      })
+      .catch((error) => {
+        if (error.message === 'Debounced') {
+          this.logger.log('verbose', error.message, { query, error })
+        } else {
+          this.logger.error('Script failed', { query, error })
+        }
+      })
   }
 }
 

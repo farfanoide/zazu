@@ -4,12 +4,12 @@ const jetpack = require('fs-jetpack')
 const path = require('path')
 
 class Theme extends Package {
-  constructor (url) {
+  constructor(url) {
     super(url)
     this.loaded = false
   }
 
-  update () {
+  update() {
     return super.update().catch((error) => {
       notification.push({
         title: 'Theme update failed',
@@ -18,17 +18,20 @@ class Theme extends Package {
     })
   }
 
-  load () {
-    return super.load().then((plugin) => {
-      this.logger.log('info', 'loading css for theme')
-      this.css = plugin.css = jetpack.read(path.join(this.path, plugin.stylesheet))
-      return plugin
-    }).catch((error) => {
-      notification.push({
-        title: 'Theme install failed',
-        message: error,
+  load() {
+    return super
+      .load()
+      .then((plugin) => {
+        this.logger.log('info', 'loading css for theme')
+        this.css = plugin.css = jetpack.read(path.join(this.path, plugin.stylesheet))
+        return plugin
       })
-    })
+      .catch((error) => {
+        notification.push({
+          title: 'Theme install failed',
+          message: error,
+        })
+      })
   }
 }
 

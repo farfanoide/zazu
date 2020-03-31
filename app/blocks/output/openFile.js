@@ -4,13 +4,13 @@ const os = require('os')
 const Block = require('../block')
 
 class OpenFile extends Block {
-  constructor (data) {
+  constructor(data) {
     super(data)
     this.script = data.script
     this.cwd = data.cwd
   }
 
-  call (state, environment = {}) {
+  call(state, environment = {}) {
     const fullPath = state.value.replace(/^~/, os.homedir())
     this.logger.log('info', 'Opening File', { fullPath })
     shell.openItem(fullPath)

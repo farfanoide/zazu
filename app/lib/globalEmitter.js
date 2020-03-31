@@ -2,7 +2,7 @@ const electron = require('electron')
 const EventEmitter = require('events')
 
 class MyEmitter extends EventEmitter {
-  on (eventName, listener) {
+  on(eventName, listener) {
     super.on(eventName, listener)
     this.ipc.on(eventName, (event, ...arguments_) => {
       listener(...arguments_)
@@ -11,12 +11,12 @@ class MyEmitter extends EventEmitter {
 }
 
 class MainEmitter extends MyEmitter {
-  constructor () {
+  constructor() {
     super()
     this.ipc = electron.ipcMain
   }
 
-  emit (eventName, ...arguments_) {
+  emit(eventName, ...arguments_) {
     super.emit(eventName, ...arguments_)
     electron.BrowserWindow.getAllWindows().forEach((window) => {
       window.webContents.send(eventName, ...arguments_)
@@ -25,12 +25,12 @@ class MainEmitter extends MyEmitter {
 }
 
 class RendererEmitter extends MyEmitter {
-  constructor () {
+  constructor() {
     super()
     this.ipc = electron.ipcRenderer
   }
 
-  emit (eventName, ...arguments_) {
+  emit(eventName, ...arguments_) {
     super.emit(eventName, ...arguments_)
     // this takes 3% of time
     this.ipc.send(eventName, ...arguments_)

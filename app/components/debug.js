@@ -14,7 +14,7 @@ class Debug extends React.Component {
     }
   }
 
-  log = options => {
+  log = (options) => {
     const items = Object.assign([], this.state.items)
     const plugins = Object.assign([], this.state.plugins)
     items.unshift(
@@ -32,7 +32,7 @@ class Debug extends React.Component {
   }
 
   componentDidMount() {
-    globalEmitter.on('pluginLog', options => {
+    globalEmitter.on('pluginLog', (options) => {
       this.log(options)
     })
   }
@@ -41,13 +41,13 @@ class Debug extends React.Component {
     globalEmitter.removeAllListeners('pluginLog')
   }
 
-  handleTypeChange = error => {
+  handleTypeChange = (error) => {
     this.setState({
       selectedLevel: error.target.value,
     })
   }
 
-  handlePluginChange = error => {
+  handlePluginChange = (error) => {
     this.setState({
       selectedPlugin: error.target.value,
     })
@@ -77,19 +77,19 @@ class Debug extends React.Component {
     return (
       <ul>
         <select defaultValue="Any" onChange={this.handlePluginChange}>
-          {['Any'].concat(this.state.plugins).map(plugin => {
+          {['Any'].concat(this.state.plugins).map((plugin) => {
             return <option key={plugin}>{plugin}</option>
           })}
         </select>
         <select defaultValue={this.state.selectedLevel} onChange={this.handleTypeChange}>
-          {this.state.logTypes.map(logType => {
+          {this.state.logTypes.map((logType) => {
             return <option key={logType}>{logType}</option>
           })}
         </select>
 
         <ul>
           {this.state.items
-            .filter(item => {
+            .filter((item) => {
               return allowedPlugins.includes(item.plugin) && allowedLevels.includes(item.level)
             })
             .slice(0, 100)
