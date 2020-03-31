@@ -1,8 +1,24 @@
 module.exports = {
   parser: 'babel-eslint',
-  extends: ['standard', 'plugin:react/recommended'],
-  rules: { 'comma-dangle': [2, 'always-multiline'] },
-  plugins: ['react', 'html'],
+  extends: [
+    'standard',
+    'plugin:react/recommended',
+    'plugin:unicorn/recommended',
+    'prettier',
+    'prettier/flowtype',
+    'prettier/react',
+    'prettier/standard',
+  ],
+  rules: {
+    'comma-dangle': [2, 'always-multiline'],
+    'unicorn/filename-case': [
+      'error',
+      {
+        case: 'camelCase',
+      },
+    ],
+  },
+  plugins: ['react', 'html', 'babel', 'flowtype', 'react', 'unicorn'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -10,7 +26,7 @@ module.exports = {
   },
   settings: {
     react: {
-      version: '16.8.6',
+      version: '16.13.1',
     },
   },
   globals: {
