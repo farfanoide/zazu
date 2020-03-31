@@ -6,11 +6,11 @@
     <script>
       const track = require('./lib/track')
       const app = require('electron').remote.app
-      const env = require('./lib/env')
+      const environment = require('./lib/environment')
 
       track.initialize('search', {
         zazuVersion: app.getVersion(),
-        zazuEnvironment: env.name,
+        zazuEnvironment: environment.name,
       })
     </script>
     <link href="assets/stylesheets/font-awesome.min.css" rel="stylesheet" />
@@ -19,7 +19,7 @@
     <section id="zazu"></section>
     <script>
       if (process.env.NODE_ENV && process.env.NODE_ENV.match(/(development|test)/)) {
-        require('./registBabel.js')
+        require('./registerBabel.js')
         require('./app.js')
       } else {
         require('./dist/app.prod.js')

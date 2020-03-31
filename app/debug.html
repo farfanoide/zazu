@@ -6,10 +6,10 @@
     <script>
       const track = require('./lib/track')
       const app = require('electron').remote.app
-      const env = require('./lib/env')
+      const environment = require('./lib/environment')
       track.initialize('debug', {
         zazuVersion: app.getVersion(),
-        zazuEnvironment: env.name,
+        zazuEnvironment: environment.name,
       })
     </script>
     <link href="assets/stylesheets/debug.css" rel="stylesheet" />
@@ -20,7 +20,7 @@
     <ul id="debug"></ul>
     <script>
       if (process.env.NODE_ENV && process.env.NODE_ENV.match(/(development|test)/)) {
-        require('./registBabel.js')
+        require('./registerBabel.js')
         require('./debug.js')
       } else {
         require('./dist/debug.prod.js')
