@@ -8,17 +8,17 @@ const mkdirp = require('mkdirp')
 const retry = require('./retry')
 const installStatus = require('./installStatus')
 
-const currentRemoteVersion = (name) => {
+const currentRemoteVersion = name => {
   return json({
     https: true,
     host: 'api.github.com',
     path: '/repos/' + name + '/commits',
-  }).then((response) => {
+  }).then(response => {
     return response[0] ? response[0].sha : 'master'
   })
 }
 
-const currentLocalVersion = (packagePath) => {
+const currentLocalVersion = packagePath => {
   const versionPath = path.join(packagePath, '.head.zazu.')
   return new Promise((resolve, reject) => {
     fs.readFile(versionPath, (_, data) => {
@@ -60,33 +60,43 @@ const download = (remote, local) => {
  * DUPLICATE COMMENT FOR: git.install
  */
 const clone = (name, packagePath) => {
-  return installStatus.get(name).then((status) => {
+  return installStatus.get(name).then(status => {
     if (status && jetpack.exists(packagePath)) return status
-    return retry(`github clone [${name}]`, () => {
-      return currentRemoteVersion(name).then((version) => {
-        const zipUrl = `https://github.com/${name}/archive/${version}.zip`
-        const packageName = name.split('/')[1]
-        const extractDir = path.join(packagePath, '..')
-        const extractPath = path.join(extractDir, `${packageName}-${version}`)
-        const tempPath = path.join(extractDir, `${packageName}-${version}.zip`)
-        const versionPath = path.join(packagePath, '.head.zazu.')
-        return download(zipUrl, tempPath).then(() => {
-          return decompress(tempPath, extractDir)
-        }).then(() => {
-          return jetpack.removeAsync(tempPath)
-        }).then(() => {
-          return jetpack.renameAsync(extractPath, packageName)
-        }).then(() => {
-          return jetpack.writeAsync(versionPath, version)
-        })
-      }).then(() => {
-        return installStatus.set(name, 'cloned')
-      })
-    }, {
-      clean: () => {
-        return jetpack.removeAsync(packagePath)
+    return retry(
+      `github clone [${name}]`,
+      () => {
+        return currentRemoteVersion(name)
+          .then(version => {
+            const zipUrl = `https://github.com/${name}/archive/${version}.zip`
+            const packageName = name.split('/')[1]
+            const extractDirectory = path.join(packagePath, '..')
+            const extractPath = path.join(extractDirectory, `${packageName}-${version}`)
+            const temporaryPath = path.join(extractDirectory, `${packageName}-${version}.zip`)
+            const versionPath = path.join(packagePath, '.head.zazu.')
+            return download(zipUrl, temporaryPath)
+              .then(() => {
+                return decompress(temporaryPath, extractDirectory)
+              })
+              .then(() => {
+                return jetpack.removeAsync(temporaryPath)
+              })
+              .then(() => {
+                return jetpack.renameAsync(extractPath, packageName)
+              })
+              .then(() => {
+                return jetpack.writeAsync(versionPath, version)
+              })
+          })
+          .then(() => {
+            return installStatus.set(name, 'cloned')
+          })
       },
-    })
+      {
+        clean: () => {
+          return jetpack.removeAsync(packagePath)
+        },
+      },
+    )
   })
 }
 

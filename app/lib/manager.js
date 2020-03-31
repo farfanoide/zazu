@@ -6,9 +6,9 @@ const manager = (fn, warmupFn, cooldownFn) => {
     increment()
     return fn(...arguments).then(() => {
       decrement()
-    }).catch((e) => {
+    }).catch((error) => {
       decrement()
-      throw e
+      throw error
     })
   }
 }
@@ -27,8 +27,8 @@ const manager = (fn, warmupFn, cooldownFn) => {
  * })
  * ~~~
  */
-const cooldown = (fn, cb) => {
-  return manager(fn, () => {}, cb)
+const cooldown = (fn, callback) => {
+  return manager(fn, () => {}, callback)
 }
 
 /**
@@ -45,8 +45,8 @@ const cooldown = (fn, cb) => {
  * })
  * ~~~
  */
-const warmup = (fn, cb) => {
-  return manager(fn, cb, () => {})
+const warmup = (fn, callback) => {
+  return manager(fn, callback, () => {})
 }
 
 module.exports = {

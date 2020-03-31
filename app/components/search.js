@@ -31,8 +31,8 @@ const css = `
 `
 
 class Search extends React.Component {
-  constructor (props) {
-    super(props)
+  constructor (properties) {
+    super(properties)
 
     this.state = {
       input: null,

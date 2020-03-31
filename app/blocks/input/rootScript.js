@@ -13,18 +13,18 @@ class RootScript extends InputBlock {
         console: this.logger,
         cwd: data.cwd,
       })
-    } catch (e) {
+    } catch (error) {
       this.script = false
-      this.loadError = e
+      this.loadError = error
     }
   }
 
-  respondsTo (input, env = {}) {
+  respondsTo (input, environment = {}) {
     if (!this.script) {
       this.logger.error('Plugin failed to load', this.loadError)
       return false
     }
-    const respondsTo = !!this.script.respondsTo(input, env)
+    const respondsTo = !!this.script.respondsTo(input, environment)
     this.logger.log('verbose', `${respondsTo ? 'r' : 'notR'}espondsTo`, { input, respondsTo })
     return respondsTo
   }
@@ -33,7 +33,7 @@ class RootScript extends InputBlock {
     return input
   }
 
-  search (input, env = {}) {
+  search (input, environment = {}) {
     const query = this.query(input)
     this.logger.log('verbose', 'Executing Script', { query })
     return new Promise((resolve, reject) => {
@@ -42,7 +42,7 @@ class RootScript extends InputBlock {
       }, this.debounce)
       this.timeout = timeout
     }).then(() => {
-      return this._ensurePromise(this.script.search(query, env))
+      return this._ensurePromise(this.script.search(query, environment))
     }).then((results) => {
       this.logger.log('info', 'Script Results', { results: (Array.isArray(results) ? results.map(truncateResult) : results) })
       return this._validateResults(results.map((result) => Object.assign({}, result, { blockRank: 1 })))

@@ -4,7 +4,7 @@ const jetpack = require('fs-jetpack')
 const util = require('util')
 
 const configuration = require('./configuration')
-const env = require('./env')
+const environment = require('./env')
 
 jetpack.dir(configuration.logDir)
 
@@ -16,7 +16,7 @@ const transports = [
   }),
 ]
 
-if (env.isRenderer) {
+if (environment.isRenderer) {
   const PluginTransport = require('./pluginTransport')
   transports.push(new PluginTransport({}))
 }

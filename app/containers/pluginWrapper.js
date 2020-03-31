@@ -12,8 +12,8 @@ const LoadingSpinner = require('../components/loadingSpinner.js')
 const NoPlugins = require('../components/noplugins.js')
 
 class PluginWrapper extends React.Component {
-  constructor (props, context) {
-    super(props, context)
+  constructor (properties, context) {
+    super(properties, context)
 
     this.state = {
       loaded: 0,
@@ -39,7 +39,7 @@ class PluginWrapper extends React.Component {
     }
   }
 
-  componentWillMount () {
+  componentDidMount () {
     globalEmitter.on('updatePlugins', this.updatePackages)
     this.loadPackages()
   }
@@ -109,15 +109,15 @@ class PluginWrapper extends React.Component {
       this.context.logger.log('info', 'no plugins to load')
       throw new Error('no plugins to load')
     }
-    return Promise.all(plugins.map((pluginObj) => {
-      return pluginObj.load().then(() => {
+    return Promise.all(plugins.map((pluginObject) => {
+      return pluginObject.load().then(() => {
         const loaded = this.state.loaded + 1
         this.setState({
           loaded,
         })
         track.addPageAction('loadedPackage', {
           packageType: 'plugin',
-          packageName: pluginObj.id,
+          packageName: pluginObject.id,
         })
       }, reason => {
         this.context.logger.log('error', 'failed to load plugin', reason)

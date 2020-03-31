@@ -8,10 +8,10 @@ ReactDOM.render(
   <ConfigWrapper>
     <PluginWrapper />
   </ConfigWrapper>,
-  document.getElementById('zazu')
+  document.querySelector('#zazu'),
 )
 
 // Catch `esc` or `enter` to avoid alert beep.
-document.body.onkeydown = e => {
-  return e.key !== 'Enter' && e.key !== 'Escape'
-}
+document.body.addEventListener('keydown', error => {
+  return error.key !== 'Enter' && error.key !== 'Escape'
+})

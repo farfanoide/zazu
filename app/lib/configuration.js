@@ -46,9 +46,9 @@ class Configuration {
       this.loaded = true
       this.blur = data.blur
       this.height = data.height || this.height
-    } catch (e) {
+    } catch (error) {
       const logger = require('./logger')
-      logger.error('Attempted to load an invalid ~/.zazurc.json file', e)
+      logger.error('Attempted to load an invalid ~/.zazurc.json file', error)
     }
 
     return this.loaded

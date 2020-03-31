@@ -7,8 +7,8 @@ const Results = require('../components/results')
 const globalEmitter = require('../lib/globalEmitter')
 
 class Zazu extends React.Component {
-  constructor (props) {
-    super(props)
+  constructor (properties) {
+    super(properties)
 
     this.state = {
       activeIndex: 0,

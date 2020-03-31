@@ -8,7 +8,7 @@ class NoPlugins extends React.Component {
   }
 
   render () {
-    let css = `
+    const css = `
     body {
       background-color: #5CC7B2;
       margin: 0;

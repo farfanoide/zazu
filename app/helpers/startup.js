@@ -2,28 +2,28 @@ const AutoLaunch = require('auto-launch')
 const Datastore = require('nestdb')
 const { app } = require('electron')
 const path = require('path')
-const env = require('../lib/env')
+const environment = require('../lib/env')
 const logger = require('../lib/logger')
 
 const alreadyAddedToStartup = (database) => {
   return new Promise((resolve, reject) => {
-    database.find({ key: 'addedToStartup' }).exec((err, docs) => {
-      if (err) reject(err)
-      resolve(docs.length > 0)
+    database.find({ key: 'addedToStartup' }).exec((error, documents) => {
+      if (error) reject(error)
+      resolve(documents.length > 0)
     })
   })
 }
 
 const markAddedToStartup = (database) => {
   return new Promise((resolve, reject) => {
-    database.insert({ key: 'addedToStartup', value: true }, (err) => {
-      err ? reject(err) : resolve()
+    database.insert({ key: 'addedToStartup', value: true }, (error) => {
+      error ? reject(error) : resolve()
     })
   })
 }
 
 const addToStartup = () => {
-  const isLinux = ['win32', 'darwin'].indexOf(process.platform) === -1
+  const isLinux = !['win32', 'darwin'].includes(process.platform)
   if (isLinux) {
     const appLauncher = new AutoLaunch({
       name: 'Zazu App',
@@ -46,7 +46,7 @@ const addToStartup = () => {
 }
 
 module.exports = (configuration) => {
-  if (env.name !== 'production') return
+  if (environment.name !== 'production') return
   const databasePath = path.join(configuration.databaseDir, 'settings.nedb')
   const database = new Datastore({ filename: databasePath, autoload: true })
   return alreadyAddedToStartup(database).then((value) => {

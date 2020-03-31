@@ -18,8 +18,8 @@ const npmInstall = cooldown((name, packagePath) => {
     if (!jetpack.exists(packageFile)) {
       return installStatus.set(name, 'nopackage')
     }
-    const pkg = jetpack.read(packageFile, 'json')
-    const dependencies = pkg.dependencies
+    const package_ = jetpack.read(packageFile, 'json')
+    const dependencies = package_.dependencies
     if (!dependencies) {
       return installStatus.set(name, 'nodeps')
     }
@@ -29,10 +29,10 @@ const npmInstall = cooldown((name, packagePath) => {
     })
     return new Promise((resolve, reject) => {
       const npm = require('npm')
-      npm.load({ production: true, optional: false, audit: false, 'strict-ssl': false }, npmErr => {
-        if (npmErr) return reject(npmErr)
-        npm.commands.install(packagePath, packages, err => {
-          if (err) return reject(err)
+      npm.load({ production: true, optional: false, audit: false, 'strict-ssl': false }, npmError => {
+        if (npmError) return reject(npmError)
+        npm.commands.install(packagePath, packages, error => {
+          if (error) return reject(error)
           installStatus.set(name, 'installed').then(resolve)
         })
       })

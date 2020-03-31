@@ -13,7 +13,7 @@ class Preview extends Block {
     })
   }
 
-  call (state, env = {}) {
+  call (state, environment = {}) {
     const win = windowHelper('preview-block', {
       show: false,
       width: 700,

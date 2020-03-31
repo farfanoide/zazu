@@ -16,15 +16,15 @@ const commitSha = () => {
   return execSync('git rev-parse HEAD').toString()
 }
 
-const setupDynamicConfig = docsConfigFile => {
-  fs.writeFileSync(docsConfigFile, `currentCommitSha: ${commitSha()}\n`, { flag: 'a' })
-  fs.writeFileSync(docsConfigFile, `currentAppVersion: ${appVersion()}\n`, { flag: 'a' })
+const setupDynamicConfig = documentationConfigFile => {
+  fs.writeFileSync(documentationConfigFile, `currentCommitSha: ${commitSha()}\n`, { flag: 'a' })
+  fs.writeFileSync(documentationConfigFile, `currentAppVersion: ${appVersion()}\n`, { flag: 'a' })
 }
 
-const cleanupDynamicConfig = docsConfigFile => {
-  const data = fs.readFileSync(docsConfigFile)
+const cleanupDynamicConfig = documentationConfigFile => {
+  const data = fs.readFileSync(documentationConfigFile)
   fs.writeFileSync(
-    docsConfigFile,
+    documentationConfigFile,
     data
       .toString()
       .split('\n')
@@ -32,22 +32,22 @@ const cleanupDynamicConfig = docsConfigFile => {
         return !line.match(/currentCommitSha|currentAppVersion/)
       })
       .join('\n')
-      .trim() + '\n'
+      .trim() + '\n',
   )
 }
 
 gulp.task('ghpages', () => {
-  const docsDirectory = path.join('docs')
-  const docsConfigFile = path.join(docsDirectory, '_config.yml')
-  setupDynamicConfig(docsConfigFile)
+  const documentationDirectory = path.join('docs')
+  const documentationConfigFile = path.join(documentationDirectory, '_config.yml')
+  setupDynamicConfig(documentationConfigFile)
   console.log('start publishing')
   return new Promise((resolve, reject) => {
-    ghpages.publish(docsDirectory, { dotfiles: true }, error => {
+    ghpages.publish(documentationDirectory, { dotfiles: true }, error => {
       if (error) {
         console.error(error)
         reject(error)
       } else {
-        cleanupDynamicConfig(docsConfigFile)
+        cleanupDynamicConfig(documentationConfigFile)
         console.log('Deployed documentation')
         resolve()
       }

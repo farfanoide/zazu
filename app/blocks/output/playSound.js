@@ -9,7 +9,7 @@ class PlaySound extends Block {
     this.cwd = data.cwd
   }
 
-  call (state, env = {}) {
+  call (state, environment = {}) {
     const file = Template.compile(this.file, {
       value: String(state.value),
     })

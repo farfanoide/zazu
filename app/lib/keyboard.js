@@ -4,20 +4,20 @@ const events = {}
 const self = {
   emit: key => {
     if (!events[key]) return
-    events[key].forEach(obj => obj['cb']())
+    events[key].forEach(object => object.cb())
   },
 
   unbind: namespace => {
     Object.keys(events).forEach(key => {
-      events[key].forEach((el, i) => {
-        if (el.namespace === namespace) {
+      events[key].forEach((element, i) => {
+        if (element.namespace === namespace) {
           events[key].splice(i, 1)
         }
       })
     })
   },
 
-  bind: (namespace, keys, cb) => {
+  bind: (namespace, keys, callback) => {
     const keysArray = typeof keys === 'string' ? [keys] : keys
     keysArray.forEach(key => {
       if (!events[key]) {
@@ -26,7 +26,7 @@ const self = {
           self.emit(key)
         })
       }
-      events[key].push({ cb, namespace })
+      events[key].push({ cb: callback, namespace })
     })
   },
 }

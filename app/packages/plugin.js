@@ -105,11 +105,11 @@ class Plugin extends Package {
           throw new Error(`Type "${output.type}" is not a recognized output block.`)
         }
       })
-    }).catch((e) => {
-      this.logger.error(this.id + ' failed to load', e)
+    }).catch((error) => {
+      this.logger.error(this.id + ' failed to load', error)
       notification.push({
         title: this.id + ' failed to load',
-        message: e.message,
+        message: error.message,
       })
     })
   }
@@ -151,7 +151,7 @@ class Plugin extends Package {
   transformResults (blockId, results = []) {
     return results.map((result) => {
       const icon = result.icon || this.plugin.icon || 'fa-bolt'
-      const isFontAwesome = (icon.indexOf('fa-') === 0 && icon.indexOf('.') === -1)
+      const isFontAwesome = (icon.indexOf('fa-') === 0 && !icon.includes('.'))
       const isAbsolutePath = (icon.indexOf('/') === 0 || icon.indexOf(this.path) === 0)
       const isResource = icon.startsWith('http') || icon.startsWith('data:image')
       const shouldAddPath = !isFontAwesome && !isAbsolutePath && !isResource

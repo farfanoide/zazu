@@ -3,7 +3,7 @@ const RootScript = require('../../../../app/blocks/input/rootScript')
 
 const rootScript = new RootScript({})
 rootScript.script = {
-  search: (input, env) => {
+  search: (input, environment) => {
     return new Promise((resolve, reject) => {
       setTimeout(resolve, 1100)
     })

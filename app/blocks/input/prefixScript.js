@@ -16,9 +16,9 @@ class PrefixScript extends InputBlock {
         console: this.logger,
         cwd: data.cwd,
       })
-    } catch (e) {
+    } catch (error) {
       this.script = false
-      this.loadError = e
+      this.loadError = error
     }
   }
 
@@ -59,7 +59,7 @@ class PrefixScript extends InputBlock {
     return respondsTo ? respondsTo[1] || '' : ''
   }
 
-  search (input, env = {}) {
+  search (input, environment = {}) {
     const query = this.query(input)
     this.logger.log('verbose', 'Executing Script', { query })
     return new Promise((resolve, reject) => {
@@ -69,7 +69,7 @@ class PrefixScript extends InputBlock {
       this.timeout = timeout
     })
       .then(() => {
-        return this._ensurePromise(this.script(query, env))
+        return this._ensurePromise(this.script(query, environment))
       })
       .then(results => {
         this.logger.log('info', 'Script Results', {

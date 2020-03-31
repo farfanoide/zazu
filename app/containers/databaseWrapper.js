@@ -9,8 +9,8 @@ const track = require('../lib/track')
 const resultSorter = require('../transforms/resultSorter')
 
 class DatabaseWrapper extends React.Component {
-  constructor (props, context) {
-    super(props, context)
+  constructor (properties, context) {
+    super(properties, context)
 
     const { configuration } = this.context
     const databasePath = path.join(configuration.databaseDir, 'track.nedb')
@@ -20,9 +20,9 @@ class DatabaseWrapper extends React.Component {
     }
   }
 
-  componentWillMount () {
-    this.state.database.find({}).exec((err, clickedResults) => {
-      if (err) return
+  componentDidMount () {
+    this.state.database.find({}).exec((error, clickedResults) => {
+      if (error) return
       this.setState({
         clickedResults,
       })

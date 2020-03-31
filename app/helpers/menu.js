@@ -5,7 +5,7 @@ const configuration = require('../lib/configuration')
 const globalEmitter = require('../lib/globalEmitter')
 const Update = require('../lib/update')
 
-const openDevTools = () => {
+const openDevelopmentTools = () => {
   const currentWindow = BrowserWindow.getFocusedWindow()
   if (currentWindow) {
     if (currentWindow.isDevToolsOpened()) {
@@ -38,7 +38,7 @@ const appTemplate = [
       {
         label: 'Toggle Chrome DevTools',
         accelerator: 'Alt+CmdOrCtrl+I',
-        click: openDevTools,
+        click: openDevelopmentTools,
       },
       {
         label: 'Quit',
@@ -78,7 +78,7 @@ const trayTemplate = [
       {
         label: 'Chrome DevTools',
         accelerator: 'Alt+CmdOrCtrl+I',
-        click: openDevTools,
+        click: openDevelopmentTools,
       },
     ],
   },

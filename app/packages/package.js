@@ -29,8 +29,8 @@ class Package {
           plugin.blocks.input = plugin.blocks.input || []
           plugin.blocks.output = plugin.blocks.output || []
           return plugin
-        } catch (e) {
-          this.logger.error(`failed to load "${this.url}" configuration`, e)
+        } catch (error) {
+          this.logger.error(`failed to load "${this.url}" configuration`, error)
           notification.push({
             title: 'Configuration failed to load',
             message: `There was a syntax error in configuration for "${this.url}"`,
@@ -50,11 +50,11 @@ class Package {
               jetpack
                 .existsAsync(path.join(this.path, 'zazu.json'))
                 .then(result =>
-                  result === 'file' ? resolve() : reject(new Error(`result of jetpack.existsAsync is ${result}`))
+                  result === 'file' ? resolve() : reject(new Error(`result of jetpack.existsAsync is ${result}`)),
                 ),
-            500
-          )
-        )
+            500,
+          ),
+        ),
     )
   }
 

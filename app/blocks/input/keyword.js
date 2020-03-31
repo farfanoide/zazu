@@ -11,13 +11,13 @@ class Keyword extends InputBlock {
 
   respondsTo (input) {
     const longEnough = input.length > 2
-    const partOfKeyword = this.keyword.indexOf(input) !== -1
+    const partOfKeyword = this.keyword.includes(input)
     const respondsTo = longEnough && !!partOfKeyword
     this.logger.log('verbose', `${respondsTo ? 'r' : 'notR'}esponds to input`, { input, respondsTo })
     return respondsTo
   }
 
-  search (input, env = {}) {
+  search (input, environment = {}) {
     this.logger.log('info', 'Rendering keyword', { input })
     return Promise.resolve([
       {

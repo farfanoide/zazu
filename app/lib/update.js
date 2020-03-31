@@ -35,8 +35,8 @@ var self = {
         .then(body => {
           resolve(body.version || app.getVersion())
         })
-        .catch(e => {
-          reject(new Error(`Got error: ${e.message}`))
+        .catch(error => {
+          reject(new Error(`Got error: ${error.message}`))
         })
     })
   },
@@ -71,7 +71,7 @@ var self = {
               } else {
                 logger.log('info', 'Eh, maybe later', { updateVersion })
               }
-            }
+            },
           )
         } else if (manualUpdate) {
           dialog.showMessageBox({

@@ -12,19 +12,19 @@ class UserScript extends Block {
         console: this.logger,
         cwd: data.cwd,
       })
-    } catch (e) {
+    } catch (error) {
       this.script = false
-      this.loadError = e
+      this.loadError = error
     }
   }
 
-  call (state, env = {}) {
+  call (state, environment = {}) {
     if (!this.script) {
       this.logger.error('Plugin failed to load', this.loadError)
       return Promise.resolve()
     }
     this.logger.log('verbose', 'Executing Script', { value: state.value })
-    return this._ensurePromise(this.script(state.value, env)).then((output) => {
+    return this._ensurePromise(this.script(state.value, environment)).then((output) => {
       state.value = output
       this.logger.log('info', 'User Script results', { value: state.value })
       return state.next()

@@ -9,7 +9,7 @@ describe('ResultSorter', () => {
         { id: 'taco', blockRank: 1 },
         { id: 'quesadilla', blockRank: 1 },
       ]
-      const clicked = [ { id: 'taco' } ]
+      const clicked = [{ id: 'taco' }]
       const sortedNames = resultSorter.sort(results, clicked)
       expect(sortedNames).to.deep.equal([
         { id: 'taco', blockRank: 1 },
@@ -43,7 +43,7 @@ describe('ResultSorter', () => {
         { id: 2, name: 'taco', blockRank: 1 },
         { id: 3, name: 'quesadilla', blockRank: 1 },
       ]
-      const clicked = [ { id: 2 } ]
+      const clicked = [{ id: 2 }]
       const sortedNames = resultSorter.sort(results, clicked).map((item) => {
         return item.name
       })
@@ -115,7 +115,7 @@ describe('ResultSorter', () => {
         { id: 'taco', blockRank: 1 },
         { id: 'quesadilla', blockRank: 0 },
       ]
-      const clicked = [ { id: 'quesadilla' }, { id: 'quesadilla' } ]
+      const clicked = [{ id: 'quesadilla' }, { id: 'quesadilla' }]
       const sortedNames = resultSorter.sort(results, clicked)
       expect(sortedNames).to.deep.equal([
         { id: 'quesadilla', blockRank: 0 },

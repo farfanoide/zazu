@@ -3,11 +3,11 @@ const jetpack = require('fs-jetpack')
 const path = require('path')
 const { git } = require('../../app/lib/git')
 
-const homeDir = path.join(__dirname, '../../test/fixtures/home')
-const calcPlugin = path.join(homeDir, '.zazu', 'plugins', 'tinytacoteam', 'zazu-calculator')
-const fallbackPlugin = path.join(homeDir, '.zazu', 'plugins', 'tinytacoteam', 'zazu-fallback')
-const databaseFile = path.join(homeDir, '.zazu', 'databases', 'installStatus.nedb')
-const configFile = path.join(homeDir, '.zazurc.json')
+const homeDirectory = path.join(__dirname, '../../test/fixtures/home')
+const calcPlugin = path.join(homeDirectory, '.zazu', 'plugins', 'tinytacoteam', 'zazu-calculator')
+const fallbackPlugin = path.join(homeDirectory, '.zazu', 'plugins', 'tinytacoteam', 'zazu-fallback')
+const databaseFile = path.join(homeDirectory, '.zazu', 'databases', 'installStatus.nedb')
+const configFile = path.join(homeDirectory, '.zazurc.json')
 
 Before(function () {
   return git(['checkout', configFile]).then(() => {
@@ -17,10 +17,10 @@ Before(function () {
   }).then(() => {
     return git(['checkout', databaseFile])
   }).then(() => {
-    const logDir = path.join(homeDir, '.zazu/log')
-    const files = jetpack.list(logDir) || []
+    const logDirectory = path.join(homeDirectory, '.zazu/log')
+    const files = jetpack.list(logDirectory) || []
     return files.map((file) => {
-      const logFile = path.join(logDir, file)
+      const logFile = path.join(logDirectory, file)
       jetpack.remove(logFile)
     })
   })

@@ -4,7 +4,7 @@ const PropTypes = require('prop-types')
 const Style = require('./style')
 
 const LoadingSpinner = ({ loaded, total }) => {
-  let css = `
+  const css = `
     body {
       background-color: #5CC7B2;
       margin: 0;

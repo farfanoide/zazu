@@ -10,8 +10,8 @@ class ServiceScript extends ExternalBlock {
     this.options = options
     this.type = data.type
     this.connections = []
-    this.interval = parseInt(data.interval, 10)
-    if (isNaN(this.interval) || this.interval < 100) {
+    this.interval = Number.parseInt(data.interval, 10)
+    if (Number.isNaN(this.interval) || this.interval < 100) {
       this.interval = 100
     }
     try {
@@ -21,9 +21,9 @@ class ServiceScript extends ExternalBlock {
         console: this.logger,
         cwd: this.cwd,
       })
-    } catch (e) {
+    } catch (error) {
       this.script = false
-      this.loadError = e
+      this.loadError = error
     }
   }
 

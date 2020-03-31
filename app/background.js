@@ -60,7 +60,7 @@ app.on('ready', function () {
       },
       () => {
         app.quit()
-      }
+      },
     )
   }
   logger.debug('app is ready', {
@@ -79,7 +79,7 @@ app.on('ready', function () {
           globalEmitter.emit('triggerHotkey', accelerator)
           logger.log('info', 'triggered a hotkey', { hotkey: accelerator })
         })
-      } catch (e) {
+      } catch (error) {
         logger.log('error', 'failed to register hotkey', { hotkey: accelerator })
       }
     }

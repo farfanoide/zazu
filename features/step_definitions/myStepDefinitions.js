@@ -11,11 +11,11 @@ const { git, clone } = require('../../app/lib/git')
 const exec = promisify(childProcess.exec)
 
 const appPath = path.join(__dirname, '../../', 'app/background.js')
-const homeDir = path.join(__dirname, '../../test/fixtures/home')
-const pluginDir = path.join(homeDir, '.zazu/plugins')
-const calcProfile = path.join(homeDir, '.calculator.zazurc.json')
-const fallbackProfile = path.join(homeDir, '.fallback.zazurc.json')
-const homeProfile = path.join(homeDir, '.zazurc.json')
+const homeDirectory = path.join(__dirname, '../../test/fixtures/home')
+const pluginDirectory = path.join(homeDirectory, '.zazu/plugins')
+const calcProfile = path.join(homeDirectory, '.calculator.zazurc.json')
+const fallbackProfile = path.join(homeDirectory, '.fallback.zazurc.json')
+const homeProfile = path.join(homeDirectory, '.zazurc.json')
 
 setDefaultTimeout(60 * 1000)
 
@@ -32,7 +32,7 @@ class World {
       args: [appPath],
       env: {
         NODE_ENV: 'test',
-        ZAZU_HOME: homeDir,
+        ZAZU_HOME: homeDirectory,
       },
     })
     return Promise.resolve()
@@ -100,8 +100,8 @@ class World {
       return Promise.resolve(robot.keyTap(key, modifier))
     } else {
       // * will becomes 8, see https://github.com/octalmage/robotjs/issues/285
-      const robotjsBadChars = /[~!@#$%^&*()_+{}|:"<>?]/
-      let match = key.match(robotjsBadChars)
+      const robotjsBadChars = /[!"#$%&()*+:<>?@^_{|}~]/
+      const match = key.match(robotjsBadChars)
       if (match) {
         return Promise.resolve(robot.keyTap(key, 'shift'))
       }
@@ -148,7 +148,7 @@ const wait = time => {
 const eventually = (func, expectedValue) => {
   const assert = actualValue => {
     if (actualValue !== expectedValue) {
-      throw new Error(`Values didn't match`)
+      throw new Error('Values didn\'t match')
     }
   }
   return new Promise((resolve, reject) => {
@@ -186,10 +186,10 @@ Given('the app is launched', { timeout: 120 * 1000 }, async function () {
 })
 
 Given('I have {string} installed before packagist support', function (plugin) {
-  const fallbackDir = path.join(pluginDir, plugin)
-  return clone(plugin, fallbackDir)
+  const fallbackDirectory = path.join(pluginDirectory, plugin)
+  return clone(plugin, fallbackDirectory)
     .then(() => {
-      return git(['reset', '--hard', '16e4e50'], { cwd: fallbackDir })
+      return git(['reset', '--hard', '16e4e50'], { cwd: fallbackDirectory })
     })
     .then(() => {
       return this.profile('fallback')
@@ -254,7 +254,7 @@ Then('the search window is visible', function () {
 Then('I have {int} result(s)', function (expected) {
   return eventually(() => {
     return this.getResultItems().then(items => items.length)
-  }, parseInt(expected, 10))
+  }, Number.parseInt(expected, 10))
 })
 
 Then('the input is empty', function () {

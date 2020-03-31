@@ -10,10 +10,10 @@ class Result extends React.Component {
     this.props.handleTab(this.props.value)
   }
 
-  shouldComponentUpdate (nextProps) {
-    return nextProps.active !== this.props.active ||
-      nextProps.value !== this.props.value ||
-      nextProps.onClick !== this.props.onClick
+  shouldComponentUpdate (nextProperties) {
+    return nextProperties.active !== this.props.active ||
+      nextProperties.value !== this.props.value ||
+      nextProperties.onClick !== this.props.onClick
   }
 
   componentDidUpdate () {
@@ -31,13 +31,13 @@ class Result extends React.Component {
     }
   }
 
-  setReference = (el) => {
-    this.el = el
+  setReference = (element) => {
+    this.el = element
   }
 
   renderIcon = () => {
     const { value } = this.props
-    const isFontAwesome = value.icon.startsWith('fa') && value.icon.indexOf('.') === -1
+    const isFontAwesome = value.icon.startsWith('fa') && !value.icon.includes('.')
 
     if (isFontAwesome) {
       return <i className={`icon fa ${value.icon}`} aria-hidden='true'/>

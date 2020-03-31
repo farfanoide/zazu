@@ -10,9 +10,9 @@ const Style = require('./style')
 class Results extends React.PureComponent {
   moveUp = () => {
     const { values, activeIndex } = this.props
-    const prevIndex = activeIndex - 1
+    const previousIndex = activeIndex - 1
     const lastIndex = values.length - 1
-    const index = prevIndex < 0 ? lastIndex : prevIndex
+    const index = previousIndex < 0 ? lastIndex : previousIndex
     this.context.logger.log('info', 'move up', { index, activeIndex })
     this.props.handleUpdateActiveIndex(index)
   }

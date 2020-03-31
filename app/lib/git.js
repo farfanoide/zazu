@@ -6,28 +6,28 @@ const jetpack = require('fs-jetpack')
 const mkdirp = require('mkdirp')
 const path = require('path')
 
-const git = (args, options) => {
+const git = (arguments_, options) => {
   return new Promise((resolve, reject) => {
-    execFile(gitPath(), args, options || {}, (err) => {
-      err ? reject(err) : resolve()
+    execFile(gitPath(), arguments_, options || {}, (error) => {
+      error ? reject(error) : resolve()
     })
   })
 }
 
-const gitSync = (args) => {
+const gitSync = (arguments_) => {
   try {
-    return execFileSync(gitPath(), args).toString()
-  } catch (e) {
+    return execFileSync(gitPath(), arguments_).toString()
+  } catch (error) {
     return false
   }
 }
 
 const pull = (name, packagePath) => {
-  return git(['pull'], { cwd: packagePath }).catch((err) => {
-    if (err.message.match(/ENOENT/i)) {
+  return git(['pull'], { cwd: packagePath }).catch((error) => {
+    if (error.message.match(/enoent/i)) {
       throw new Error('Package "' + name + '" is not cloned')
     } else {
-      throw err
+      throw error
     }
   })
 }
@@ -48,13 +48,13 @@ const clone = (name, packagePath) => {
     return retry(`git clone [${name}]`, () => {
       const packageUrl = 'https://github.com/' + name + '.git'
       return mkdirp(path.dirname(packagePath)).then(() => {
-        return git(['clone', packageUrl, packagePath]).catch((err) => {
-          if (err.message.match(/already exists/i)) {
+        return git(['clone', packageUrl, packagePath]).catch((error) => {
+          if (error.message.match(/already exists/i)) {
             return true// futher promises will resolve
-          } else if (err.message.match(/Repository not found/i)) {
+          } else if (error.message.match(/repository not found/i)) {
             throw new Error('Package "' + name + '" does not exist on github')
           } else {
-            throw err
+            throw error
           }
         })
       }).then(() => {
@@ -75,7 +75,7 @@ const gitPath = () => {
 const isInstalled = () => {
   try {
     return gitPath() && !!gitSync(['--version'])
-  } catch (e) {
+  } catch (error) {
     return false
   }
 }

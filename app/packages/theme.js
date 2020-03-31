@@ -23,10 +23,10 @@ class Theme extends Package {
       this.logger.log('info', 'loading css for theme')
       this.css = plugin.css = jetpack.read(path.join(this.path, plugin.stylesheet))
       return plugin
-    }).catch((errorMessage) => {
+    }).catch((error) => {
       notification.push({
         title: 'Theme install failed',
-        message: errorMessage,
+        message: error,
       })
     })
   }
