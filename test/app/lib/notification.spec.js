@@ -1,4 +1,4 @@
-import { expect  } from 'chai'
+import { expect } from 'chai'
 import notification from '../../../app/lib/notification'
 import sinon from 'sinon'
 

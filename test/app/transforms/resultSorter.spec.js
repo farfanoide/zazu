@@ -1,4 +1,4 @@
-import { expect  } from 'chai'
+import { expect } from 'chai'
 import resultSorter from '../../../app/transforms/resultSorter'
 
 describe('ResultSorter', () => {

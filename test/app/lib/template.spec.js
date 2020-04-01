@@ -1,4 +1,4 @@
-import { expect  } from 'chai'
+import { expect } from 'chai'
 import Template from '../../../app/lib/template'
 
 describe('Template', () => {

@@ -1,8 +1,8 @@
-import { setWorldConstructor, setDefaultTimeout, Given, When, Then  } from 'cucumber'
+import { setWorldConstructor, setDefaultTimeout, Given, When, Then } from 'cucumber'
 import path from 'path'
 import os from 'os'
 import childProcess from 'child_process'
-import { promisify  } from 'util'
+import { promisify } from 'util'
 import isTravis from 'is-travis'
 import { Application } from 'spectron'
 import jetpack from 'fs-jetpack'
@@ -188,7 +188,8 @@ Given('the app is launched', { timeout: 120 * 1000 }, async function () {
 
 Given('I have {string} installed before packagist support', function (plugin) {
   const fallbackDirectory = path.join(pluginDirectory, plugin)
-  return git.clone(plugin, fallbackDirectory)
+  return git
+    .clone(plugin, fallbackDirectory)
     .then(() => {
       return git.git(['reset', '--hard', '16e4e50'], { cwd: fallbackDirectory })
     })

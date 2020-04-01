@@ -1,4 +1,4 @@
-import { expect  } from 'chai'
+import { expect } from 'chai'
 import configuration from '../../../app/lib/configuration'
 import jetpack from 'fs-jetpack'
 import os from 'os'

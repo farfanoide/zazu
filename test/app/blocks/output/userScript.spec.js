@@ -1,4 +1,4 @@
-import { expect  } from 'chai'
+import { expect } from 'chai'
 import UserScript from '../../../../app/blocks/output/userScript'
 
 const userScript = new UserScript({})

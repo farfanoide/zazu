@@ -22,7 +22,6 @@ import globalEmitter from '../lib/globalEmitter'
 
 import Package from './package'
 
-
 const inputClasses = { RootScript, PrefixScript, Keyword }
 const outputClasses = {
   CopyToClipboard,

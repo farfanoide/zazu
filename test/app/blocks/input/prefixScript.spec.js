@@ -1,4 +1,4 @@
-import { expect  } from 'chai'
+import { expect } from 'chai'
 import PrefixScript from '../../../../app/blocks/input/prefixScript'
 
 var prefixScript = new PrefixScript({

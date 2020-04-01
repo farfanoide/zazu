@@ -1,5 +1,5 @@
 /* eslint-disable unicorn/filename-case */
-import { After, Before  } from 'cucumber'
+import { After, Before } from 'cucumber'
 import jetpack from 'fs-jetpack'
 import path from 'path'
 import git from '../../app/lib/git'
@@ -11,7 +11,8 @@ const databaseFile = path.join(homeDirectory, '.zazu', 'databases', 'installStat
 const configFile = path.join(homeDirectory, '.zazurc.json')
 
 Before(function () {
-  return git.git(['checkout', configFile])
+  return git
+    .git(['checkout', configFile])
     .then(() => {
       jetpack.remove(calcPlugin)
       jetpack.remove(fallbackPlugin)

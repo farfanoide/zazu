@@ -1,4 +1,4 @@
-import { expect  } from 'chai'
+import { expect } from 'chai'
 import RootScript from '../../../../app/blocks/input/rootScript'
 
 const rootScript = new RootScript({})
