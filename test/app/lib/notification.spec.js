@@ -1,6 +1,6 @@
-const { expect } = require('chai')
-const notification = require('../../../app/lib/notification')
-const sinon = require('sinon')
+import { expect  } from 'chai'
+import notification from '../../../app/lib/notification'
+import sinon from 'sinon'
 
 describe('Notification', () => {
   describe('displayFirstNotificationInQueue', () => {

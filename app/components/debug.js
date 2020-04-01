@@ -1,5 +1,5 @@
-const React = require('react')
-const globalEmitter = require('../lib/globalEmitter')
+import React from 'react'
+import globalEmitter from '../lib/globalEmitter'
 
 class Debug extends React.Component {
   constructor(properties) {
@@ -111,4 +111,4 @@ class Debug extends React.Component {
   }
 }
 
-module.exports = Debug
+export default Debug

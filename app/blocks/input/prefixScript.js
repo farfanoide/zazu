@@ -1,10 +1,10 @@
-const path = require('path')
-const electron = require('electron')
+import path from 'path'
+import electron from 'electron'
 
-const InputBlock = require('../inputBlock')
-const truncateResult = require('../../lib/truncateResult')
+import InputBlock from '../inputBlock'
+import truncateResult from '../../lib/truncateResult'
 
-class PrefixScript extends InputBlock {
+export default class PrefixScript extends InputBlock {
   constructor(data) {
     super(data)
     this.prefix = data.prefix || this.requiredField('prefix')
@@ -86,5 +86,3 @@ class PrefixScript extends InputBlock {
       })
   }
 }
-
-module.exports = PrefixScript

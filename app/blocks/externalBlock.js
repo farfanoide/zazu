@@ -1,7 +1,7 @@
-const EventEmitter = require('events')
-const cuid = require('cuid')
+import EventEmitter from 'events'
+import cuid from 'cuid'
 
-const logger = require('../lib/logger')
+import logger from '../lib/logger'
 
 class ExternalBlock extends EventEmitter {
   constructor(data, options) {
@@ -24,4 +24,4 @@ class ExternalBlock extends EventEmitter {
   }
 }
 
-module.exports = ExternalBlock
+export default ExternalBlock

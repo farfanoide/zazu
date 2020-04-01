@@ -1,4 +1,4 @@
-module.exports = (needle, list) => {
+export default (needle, list) => {
   const haystack = list.slice(0)
   if (haystack.includes(needle)) {
     const index = haystack.indexOf(needle)

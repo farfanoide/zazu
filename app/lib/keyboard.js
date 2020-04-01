@@ -1,7 +1,7 @@
-const Mousetrap = require('mousetrap')
+import Mousetrap from 'mousetrap'
 
 const events = {}
-const self = {
+const keyboard = {
   emit: (key) => {
     if (!events[key]) return
     events[key].forEach((object) => object.cb())
@@ -23,7 +23,7 @@ const self = {
       if (!events[key]) {
         events[key] = []
         Mousetrap.bind(key, () => {
-          self.emit(key)
+          keyboard.emit(key)
         })
       }
       events[key].push({ cb: callback, namespace })
@@ -31,4 +31,4 @@ const self = {
   },
 }
 
-module.exports = self
+export default keyboard

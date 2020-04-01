@@ -1,5 +1,5 @@
-const electron = require('electron')
-const EventEmitter = require('events')
+import electron from 'electron'
+import EventEmitter from 'events'
 
 class MyEmitter extends EventEmitter {
   on(eventName, listener) {
@@ -52,4 +52,4 @@ if (process.type === 'renderer') {
 } else {
   instance = new MainEmitter()
 }
-module.exports = instance
+export default instance

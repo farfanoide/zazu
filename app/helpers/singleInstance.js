@@ -1,7 +1,7 @@
-const { app } = require('electron')
-const globalEmitter = require('../lib/globalEmitter')
+import { app } from 'electron'
+import globalEmitter from '../lib/globalEmitter'
 
-module.exports = () => {
+export default () => {
   const gotTheLock = app.requestSingleInstanceLock()
 
   if (!gotTheLock) {

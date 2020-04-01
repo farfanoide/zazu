@@ -1,8 +1,8 @@
-const path = require('path')
-const electron = require('electron')
+import path from 'path'
+import electron from 'electron'
 
-const InputBlock = require('../inputBlock')
-const truncateResult = require('../../lib/truncateResult')
+import InputBlock from '../inputBlock'
+import truncateResult from '../../lib/truncateResult'
 
 class RootScript extends InputBlock {
   constructor(data) {
@@ -61,4 +61,4 @@ class RootScript extends InputBlock {
   }
 }
 
-module.exports = RootScript
+export default RootScript

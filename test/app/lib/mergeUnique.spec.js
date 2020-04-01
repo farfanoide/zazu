@@ -1,5 +1,5 @@
-const { expect } = require('chai')
-const mergeUnique = require('../../../app/lib/mergeUnique')
+import { expect  } from 'chai'
+import mergeUnique from '../../../app/lib/mergeUnique'
 
 describe('mergeUnique', () => {
   it('adds to the end', () => {

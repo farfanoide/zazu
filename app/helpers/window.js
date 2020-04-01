@@ -1,5 +1,5 @@
-const electron = require('electron')
-const globalEmitter = require('../lib/globalEmitter')
+import electron from 'electron'
+import globalEmitter from '../lib/globalEmitter'
 const { BrowserWindow } = process.type === 'renderer' ? electron.remote : electron
 
 const autoResize = (dynamicWindow) => {
@@ -60,7 +60,7 @@ const autoResize = (dynamicWindow) => {
 
 const namedWindows = {}
 
-const openCount = () => {
+export const openCount = () => {
   return Object.keys(namedWindows).reduce((memo, windowName) => {
     const namedWindow = namedWindows[windowName]
     if (namedWindow) {
@@ -71,7 +71,7 @@ const openCount = () => {
   }, 0)
 }
 
-const windowHelper = (name, options) => {
+export const windowHelper = (name, options) => {
   if (namedWindows[name]) {
     namedWindows[name].focus()
     return namedWindows[name]
@@ -90,9 +90,4 @@ const windowHelper = (name, options) => {
   namedWindows[name].loadURL(options.url)
 
   return namedWindows[name]
-}
-
-module.exports = {
-  windowHelper,
-  openCount,
 }

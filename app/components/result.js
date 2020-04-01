@@ -1,5 +1,5 @@
-const React = require('react')
-const PropTypes = require('prop-types')
+import React from 'react'
+import PropTypes from 'prop-types'
 
 class Result extends React.Component {
   click = () => {
@@ -73,4 +73,4 @@ Result.propTypes = {
   handleTab: PropTypes.func.isRequired,
 }
 
-module.exports = Result
+export default Result

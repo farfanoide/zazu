@@ -1,6 +1,6 @@
-const React = require('react')
-const Style = require('./style')
-const { shell } = require('electron')
+import React from 'react'
+import Style from './style'
+import { shell } from 'electron'
 
 class NoPlugins extends React.Component {
   handleLinkClick = () => {
@@ -41,4 +41,4 @@ class NoPlugins extends React.Component {
   }
 }
 
-module.exports = NoPlugins
+export default NoPlugins

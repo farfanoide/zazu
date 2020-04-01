@@ -1,10 +1,10 @@
-const { execFile, execFileSync } = require('child_process')
-const which = require('which')
-const retry = require('./retry')
-const installStatus = require('./installStatus')
-const jetpack = require('fs-jetpack')
-const mkdirp = require('mkdirp')
-const path = require('path')
+import { execFile, execFileSync } from 'child_process'
+import which from 'which'
+import retry from './retry'
+import { get, set } from './installStatus'
+import jetpack from 'fs-jetpack'
+import mkdirp from 'mkdirp'
+import path from 'path'
 
 const git = (arguments_, options) => {
   return new Promise((resolve, reject) => {
@@ -43,7 +43,7 @@ const pull = (name, packagePath) => {
  * DUPLICATE COMMENT FOR: github.install
  */
 const clone = (name, packagePath) => {
-  return installStatus.get(name).then((status) => {
+  return get(name).then((status) => {
     if (status && jetpack.exists(packagePath)) return status
     return retry(
       `git clone [${name}]`,
@@ -62,7 +62,7 @@ const clone = (name, packagePath) => {
             })
           })
           .then(() => {
-            return installStatus.set(name, 'cloned')
+            return set(name, 'cloned')
           })
       },
       {
@@ -86,4 +86,4 @@ const isInstalled = () => {
   }
 }
 
-module.exports = { clone, pull, git, isInstalled }
+export default { clone, pull, git, isInstalled }

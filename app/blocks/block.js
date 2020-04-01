@@ -1,6 +1,6 @@
-const cuid = require('cuid')
+import cuid from 'cuid'
 
-const logger = require('../lib/logger')
+import logger from '../lib/logger'
 
 class Block {
   constructor(data) {
@@ -32,4 +32,4 @@ class Block {
   }
 }
 
-module.exports = Block
+export default Block

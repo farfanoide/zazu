@@ -1,9 +1,9 @@
-const electron = require('electron')
-const https = require('https')
-const http = require('http')
+import electron from 'electron'
+import https from 'https'
+import http from 'http'
 const app = electron.app || electron.remote.app
 
-module.exports = (options_) => {
+export default (options_) => {
   const options = Object.assign({}, options_, {
     headers: {
       'User-Agent': `ZazuApp v${app.getVersion()}`,

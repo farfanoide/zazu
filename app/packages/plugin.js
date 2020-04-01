@@ -1,16 +1,41 @@
-const path = require('path')
-const jetpack = require('fs-jetpack')
+import path from 'path'
+import jetpack from 'fs-jetpack'
 
-const Input = require('../blocks/input')
-const Output = require('../blocks/output')
-const External = require('../blocks/external')
+import { RootScript, PrefixScript, Keyword } from '../blocks/input'
+import {
+  CopyToClipboard,
+  OpenInBrowser,
+  SendNotification,
+  UserScript,
+  ShowFile,
+  OpenFile,
+  ReloadConfig,
+  Preview,
+  PlaySound,
+} from '../blocks/output'
+import { Hotkey, ServiceScript } from '../blocks/external'
 
-const npmInstall = require('../lib/npmInstall')
-const notification = require('../lib/notification')
-const track = require('../lib/track')
-const globalEmitter = require('../lib/globalEmitter')
+import npmInstall from '../lib/npmInstall'
+import notification from '../lib/notification'
+import track from '../lib/track'
+import globalEmitter from '../lib/globalEmitter'
 
-const Package = require('./package')
+import Package from './package'
+
+
+const inputClasses = { RootScript, PrefixScript, Keyword }
+const outputClasses = {
+  CopyToClipboard,
+  OpenInBrowser,
+  SendNotification,
+  UserScript,
+  ShowFile,
+  OpenFile,
+  ReloadConfig,
+  Preview,
+  PlaySound,
+}
+const externalClasses = { Hotkey, ServiceScript }
 
 class Plugin extends Package {
   constructor(url, options = {}) {
@@ -85,8 +110,8 @@ class Plugin extends Package {
         plugin.blocks.external.forEach((external) => {
           external.cwd = this.path
           external.pluginId = this.id
-          if (External[external.type]) {
-            this.addExternal(new External[external.type](external, this.options))
+          if (externalClasses[external.type]) {
+            this.addExternal(new externalClasses[external.type](external, this.options))
           } else {
             throw new Error(`Type "${external.type}" is not a recognized external block.`)
           }
@@ -95,8 +120,8 @@ class Plugin extends Package {
         plugin.blocks.input.forEach((input) => {
           input.cwd = this.path
           input.pluginId = this.id
-          if (Input[input.type]) {
-            this.addInput(new Input[input.type](input))
+          if (inputClasses[input.type]) {
+            this.addInput(new inputClasses[input.type](input))
           } else {
             throw new Error(`Type "${input.type}" is not a recognized input block.`)
           }
@@ -105,8 +130,8 @@ class Plugin extends Package {
         plugin.blocks.output.forEach((output) => {
           output.cwd = this.path
           output.pluginId = this.id
-          if (Output[output.type]) {
-            this.addOutput(new Output[output.type](output))
+          if (outputClasses[output.type]) {
+            this.addOutput(new outputClasses[output.type](output))
           } else {
             throw new Error(`Type "${output.type}" is not a recognized output block.`)
           }
@@ -200,4 +225,4 @@ class Plugin extends Package {
   }
 }
 
-module.exports = Plugin
+export default Plugin

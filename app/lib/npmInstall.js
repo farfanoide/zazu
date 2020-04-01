@@ -1,9 +1,9 @@
-const path = require('path')
-const jetpack = require('fs-jetpack')
-const retry = require('./retry')
-const installStatus = require('./installStatus')
-const { cooldown } = require('./manager')
-const freshRequire = require('./pluginFreshRequire')
+import path from 'path'
+import jetpack from 'fs-jetpack'
+import retry from './retry'
+import { set } from './installStatus'
+import { cooldown } from './manager'
+import freshRequire from './pluginFreshRequire'
 
 /**
  * If successful, will set the `installStatus` to `installed` and return it, to
@@ -17,12 +17,12 @@ const npmInstall = cooldown(
     return retry(`npm install [${name}]`, () => {
       const packageFile = path.join(packagePath, 'package.json')
       if (!jetpack.exists(packageFile)) {
-        return installStatus.set(name, 'nopackage')
+        return set(name, 'nopackage')
       }
       const package_ = jetpack.read(packageFile, 'json')
       const dependencies = package_.dependencies
       if (!dependencies) {
-        return installStatus.set(name, 'nodeps')
+        return set(name, 'nodeps')
       }
       const packages = Object.keys(dependencies).map((packageName) => {
         const packageVersion = dependencies[packageName]
@@ -34,7 +34,7 @@ const npmInstall = cooldown(
           if (npmError) return reject(npmError)
           npm.commands.install(packagePath, packages, (error) => {
             if (error) return reject(error)
-            installStatus.set(name, 'installed').then(resolve)
+            set(name, 'installed').then(resolve)
           })
         })
       })
@@ -45,4 +45,4 @@ const npmInstall = cooldown(
   },
 )
 
-module.exports = npmInstall
+export default npmInstall

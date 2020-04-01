@@ -1,7 +1,7 @@
-const { shell } = require('electron')
-const os = require('os')
+import { shell } from 'electron'
+import os from 'os'
 
-const Block = require('../block')
+import Block from '../block'
 
 class OpenFile extends Block {
   constructor(data) {
@@ -18,4 +18,4 @@ class OpenFile extends Block {
   }
 }
 
-module.exports = OpenFile
+export default OpenFile

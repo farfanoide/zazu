@@ -1,4 +1,4 @@
-const notifier = require('node-notifier')
+import notifier from 'node-notifier'
 
 class Notification {
   constructor() {
@@ -32,4 +32,4 @@ class Notification {
   }
 }
 
-module.exports = new Notification()
+export default new Notification()

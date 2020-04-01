@@ -1,4 +1,4 @@
-const manager = (fn, warmupFn, cooldownFn) => {
+export const manager = (fn, warmupFn, cooldownFn) => {
   let count = 0
   const decrement = () => --count === 0 && cooldownFn()
   const increment = () => count++ === 0 && warmupFn()
@@ -29,7 +29,7 @@ const manager = (fn, warmupFn, cooldownFn) => {
  * })
  * ~~~
  */
-const cooldown = (fn, callback) => {
+export const cooldown = (fn, callback) => {
   return manager(fn, () => {}, callback)
 }
 
@@ -47,11 +47,6 @@ const cooldown = (fn, callback) => {
  * })
  * ~~~
  */
-const warmup = (fn, callback) => {
+export const warmup = (fn, callback) => {
   return manager(fn, callback, () => {})
-}
-
-module.exports = {
-  warmup,
-  cooldown,
 }

@@ -1,12 +1,12 @@
-const request = require('request')
-const path = require('path')
-const fs = require('fs')
-const json = require('./json')
-const jetpack = require('fs-jetpack')
-const decompress = require('decompress')
-const mkdirp = require('mkdirp')
-const retry = require('./retry')
-const installStatus = require('./installStatus')
+import request from 'request'
+import path from 'path'
+import fs from 'fs'
+import json from './json'
+import jetpack from 'fs-jetpack'
+import decompress from 'decompress'
+import mkdirp from 'mkdirp'
+import retry from './retry'
+import { set, get } from './installStatus'
 
 const currentRemoteVersion = (name) => {
   return json({
@@ -60,7 +60,7 @@ const download = (remote, local) => {
  * DUPLICATE COMMENT FOR: git.install
  */
 const clone = (name, packagePath) => {
-  return installStatus.get(name).then((status) => {
+  return get(name).then((status) => {
     if (status && jetpack.exists(packagePath)) return status
     return retry(
       `github clone [${name}]`,
@@ -88,7 +88,7 @@ const clone = (name, packagePath) => {
               })
           })
           .then(() => {
-            return installStatus.set(name, 'cloned')
+            return set(name, 'cloned')
           })
       },
       {
@@ -104,4 +104,4 @@ const isInstalled = () => {
   return true
 }
 
-module.exports = { clone, pull, isInstalled }
+export default { clone, pull, isInstalled }

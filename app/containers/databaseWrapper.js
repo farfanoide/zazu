@@ -1,14 +1,14 @@
-const React = require('react')
-const PropTypes = require('prop-types')
+import React from 'react'
+import PropTypes from 'prop-types'
 
-const path = require('path')
-const Datastore = require('nestdb')
+import path from 'path'
+import Datastore from 'nestdb'
 
-const Zazu = require('./zazu')
-const track = require('../lib/track')
-const resultSorter = require('../transforms/resultSorter')
+import Zazu from './zazu'
+import track from '../lib/track'
+import resultSorter from '../transforms/resultSorter'
 
-class DatabaseWrapper extends React.Component {
+export default class DatabaseWrapper extends React.Component {
   constructor(properties, context) {
     super(properties, context)
 
@@ -76,5 +76,3 @@ DatabaseWrapper.propTypes = {
 DatabaseWrapper.contextTypes = {
   configuration: PropTypes.object.isRequired,
 }
-
-module.exports = DatabaseWrapper

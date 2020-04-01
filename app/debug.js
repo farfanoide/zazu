@@ -1,6 +1,6 @@
-const ReactDOM = require('react-dom')
-const React = require('react')
+import ReactDOM from 'react-dom'
+import React from 'react'
 
-const Debug = require('./components/debug')
+import Debug from './components/debug'
 
 ReactDOM.render(<Debug />, document.querySelector('#debug'))

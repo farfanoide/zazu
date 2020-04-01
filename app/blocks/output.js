@@ -1,21 +1,9 @@
-const CopyToClipboard = require('./output/copyToClipboard')
-const OpenInBrowser = require('./output/openInBrowser')
-const SendNotification = require('./output/sendNotification')
-const UserScript = require('./output/userScript')
-const ShowFile = require('./output/showFile')
-const OpenFile = require('./output/openFile')
-const ReloadConfig = require('./output/reloadConfig')
-const Preview = require('./output/preview')
-const PlaySound = require('./output/playSound')
-
-module.exports = {
-  CopyToClipboard,
-  OpenInBrowser,
-  SendNotification,
-  UserScript,
-  OpenFile,
-  ShowFile,
-  ReloadConfig,
-  Preview,
-  PlaySound,
-}
+export CopyToClipboard from './output/copyToClipboard'
+export OpenInBrowser from './output/openInBrowser'
+export SendNotification from './output/sendNotification'
+export UserScript from './output/userScript'
+export ShowFile from './output/showFile'
+export OpenFile from './output/openFile'
+export ReloadConfig from './output/reloadConfig'
+export Preview from './output/preview'
+export PlaySound from './output/playSound'

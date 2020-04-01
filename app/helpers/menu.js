@@ -1,9 +1,9 @@
-const { app, BrowserWindow, dialog, Menu, Tray } = require('electron')
-const path = require('path')
+import { app, BrowserWindow, dialog, Menu, Tray } from 'electron'
+import path from 'path'
 
-const configuration = require('../lib/configuration')
-const globalEmitter = require('../lib/globalEmitter')
-const Update = require('../lib/update')
+import configuration from '../lib/configuration'
+import globalEmitter from '../lib/globalEmitter'
+import Update from '../lib/update'
 
 const openDevelopmentTools = () => {
   const currentWindow = BrowserWindow.getFocusedWindow()
@@ -118,19 +118,16 @@ const trayTemplate = [
 ]
 
 // Remove "Toggle Zazu" for the exposed menu template
-const menuTemplate = trayTemplate.slice(2)
+export const menuTemplate = trayTemplate.slice(2)
 
 let tray
-module.exports = {
-  createMenu: () => {
-    if (app.dock) app.dock.hide()
-    if (!configuration.hideTrayItem) {
-      const iconPath = path.join(__dirname, '..', 'assets', 'images', 'iconTemplate.png')
-      tray = new Tray(iconPath)
-      tray.setToolTip('Toggle Zazu')
-      tray.setContextMenu(Menu.buildFromTemplate(trayTemplate))
-    }
-    Menu.setApplicationMenu(Menu.buildFromTemplate(appTemplate))
-  },
-  menuTemplate,
+export const createMenu = () => {
+  if (app.dock) app.dock.hide()
+  if (!configuration.hideTrayItem) {
+    const iconPath = path.join(__dirname, '..', 'assets', 'images', 'iconTemplate.png')
+    tray = new Tray(iconPath)
+    tray.setToolTip('Toggle Zazu')
+    tray.setContextMenu(Menu.buildFromTemplate(trayTemplate))
+  }
+  Menu.setApplicationMenu(Menu.buildFromTemplate(appTemplate))
 }

@@ -1,5 +1,5 @@
-const { app, clipboard, dialog } = require('electron')
-const environment = require('./lib/environment')
+import { app, clipboard, dialog } from 'electron'
+import environment from './lib/environment'
 
 const items = [
   { name: 'App Environment', value: environment.name },
@@ -9,26 +9,24 @@ const items = [
   { name: 'Chrome Version', value: process.versions.chrome },
 ]
 
-module.exports = {
-  show() {
-    const detail = items
-      .map((item) => {
-        return item.name + ': ' + item.value
-      })
-      .join('\n')
-    dialog.showMessageBox(
-      {
-        type: 'info',
-        message: 'Zazu App',
-        detail,
-        defaultId: 0,
-        buttons: ['Ok', 'Copy'],
-      },
-      (index) => {
-        if (index === 1) {
-          clipboard.writeText(detail)
-        }
-      },
-    )
-  },
+export function show() {
+  const detail = items
+    .map((item) => {
+      return item.name + ': ' + item.value
+    })
+    .join('\n')
+  dialog.showMessageBox(
+    {
+      type: 'info',
+      message: 'Zazu App',
+      detail,
+      defaultId: 0,
+      buttons: ['Ok', 'Copy'],
+    },
+    (index) => {
+      if (index === 1) {
+        clipboard.writeText(detail)
+      }
+    },
+  )
 }

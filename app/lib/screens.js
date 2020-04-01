@@ -1,5 +1,5 @@
-const electron = require('electron')
-const configuration = require('../lib/configuration')
+import electron from 'electron'
+import configuration from '../lib/configuration'
 
 class Screens {
   static getInstance(options) {
@@ -87,4 +87,4 @@ class DetectScreens {
   }
 }
 
-module.exports = Screens
+export default Screens

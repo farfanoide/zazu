@@ -1,7 +1,7 @@
-const path = require('path')
-const electron = require('electron')
+import path from 'path'
+import electron from 'electron'
 
-const ExternalBlock = require('../externalBlock')
+import ExternalBlock from '../externalBlock'
 
 class ServiceScript extends ExternalBlock {
   constructor(data, options) {
@@ -50,4 +50,4 @@ class ServiceScript extends ExternalBlock {
   }
 }
 
-module.exports = ServiceScript
+export default ServiceScript

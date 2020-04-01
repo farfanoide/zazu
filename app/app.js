@@ -1,8 +1,8 @@
-const ReactDOM = require('react-dom')
-const React = require('react')
+import ReactDOM from 'react-dom'
+import React from 'react'
 
-const ConfigWrapper = require('./containers/configWrapper')
-const PluginWrapper = require('./containers/pluginWrapper')
+import ConfigWrapper from './containers/configWrapper'
+import PluginWrapper from './containers/pluginWrapper'
 
 ReactDOM.render(
   <ConfigWrapper>

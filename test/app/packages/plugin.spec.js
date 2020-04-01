@@ -1,9 +1,9 @@
-const path = require('path')
-const sinon = require('sinon')
-const chai = require('chai')
-const sinonChai = require('sinon-chai')
-const Plugin = require('../../../app/packages/plugin')
-const Block = require('../../../app/blocks/block')
+import path from 'path'
+import sinon from 'sinon'
+import chai from 'chai'
+import sinonChai from 'sinon-chai'
+import Plugin from '../../../app/packages/plugin'
+import Block from '../../../app/blocks/block'
 const { expect } = chai
 
 chai.use(sinonChai)

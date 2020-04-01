@@ -1,7 +1,7 @@
-const React = require('react')
-const PropTypes = require('prop-types')
+import React from 'react'
+import PropTypes from 'prop-types'
 
-const Style = require('./style')
+import Style from './style'
 
 const LoadingSpinner = ({ loaded, total }) => {
   const css = `
@@ -34,4 +34,4 @@ LoadingSpinner.propTypes = {
   total: PropTypes.number.isRequired,
 }
 
-module.exports = LoadingSpinner
+export default LoadingSpinner

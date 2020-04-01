@@ -1,31 +1,31 @@
-const semver = require('semver')
-const json = require('./json')
-const { shell, app, dialog } = require('electron')
+import semver from 'semver'
+import json from './json'
+import { shell, app, dialog } from 'electron'
 
-const globalEmitter = require('./globalEmitter')
-const logger = require('./logger')
+import globalEmitter from './globalEmitter'
+import logger from './logger'
 
-var self = {
+const update = {
   _latestVersion: null,
 
   queueUpdate() {
     const thirtySeconds = 1000 * 30
     setTimeout(() => {
-      self.check()
+      update.check()
     }, thirtySeconds)
   },
 
   stallUpdate() {
     const oneDay = 1000 * 60 * 60 * 24
     setTimeout(() => {
-      self.check()
+      update.check()
     }, oneDay)
   },
 
   latestVersion() {
     return new Promise((resolve, reject) => {
-      if (self._latestVersion) {
-        return resolve(self._latestVersion)
+      if (update._latestVersion) {
+        return resolve(update._latestVersion)
       }
       json({
         https: false,
@@ -42,13 +42,13 @@ var self = {
   },
 
   needsUpdate() {
-    return self.latestVersion().then((newestVersion) => {
+    return update.latestVersion().then((newestVersion) => {
       return semver.satisfies(newestVersion, `>${app.getVersion()}`) && newestVersion
     })
   },
 
   check(manualUpdate) {
-    self
+    update
       .needsUpdate()
       .then((updateVersion) => {
         if (updateVersion) {
@@ -82,7 +82,7 @@ var self = {
             buttons: [],
           })
         } else {
-          self.stallUpdate()
+          update.stallUpdate()
         }
       })
       .catch((error) => {
@@ -91,4 +91,4 @@ var self = {
   },
 }
 
-module.exports = self
+export default update

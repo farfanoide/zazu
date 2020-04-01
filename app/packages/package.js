@@ -1,18 +1,18 @@
-const path = require('path')
-const jetpack = require('fs-jetpack')
+import path from 'path'
+import jetpack from 'fs-jetpack'
 
-const { clone, pull } = require('../lib/download')
-const configuration = require('../lib/configuration')
-const logger = require('../lib/logger')
-const notification = require('../lib/notification')
-const retry = require('../lib/retry')
+import git from '../lib/download'
+import configuration from '../lib/configuration'
+import logger from '../lib/logger'
+import notification from '../lib/notification'
+import retry from '../lib/retry'
 
 class Package {
   constructor(url) {
     this.path = path.join(configuration.pluginDir, url)
     this.url = url
-    this.clone = clone
-    this.pull = pull
+    this.clone = git.clone
+    this.pull = git.pull
     this.logger = logger.bindMeta({ plugin: this.url })
   }
 
@@ -71,4 +71,4 @@ class Package {
   }
 }
 
-module.exports = Package
+export default Package

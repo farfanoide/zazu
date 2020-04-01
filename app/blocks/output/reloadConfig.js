@@ -1,5 +1,5 @@
-const globalEmitter = require('../../lib/globalEmitter')
-const Block = require('../block')
+import globalEmitter from '../../lib/globalEmitter'
+import Block from '../block'
 
 class ReloadConfig extends Block {
   constructor(data) {
@@ -14,4 +14,4 @@ class ReloadConfig extends Block {
   }
 }
 
-module.exports = ReloadConfig
+export default ReloadConfig

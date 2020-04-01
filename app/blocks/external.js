@@ -1,7 +1,2 @@
-const Hotkey = require('./external/hotkey')
-const ServiceScript = require('./external/serviceScript')
-
-module.exports = {
-  Hotkey,
-  ServiceScript,
-}
+export Hotkey from './external/hotkey'
+export ServiceScript from './external/serviceScript'

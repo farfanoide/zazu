@@ -1,7 +1,7 @@
-const electron = require('electron')
+import electron from 'electron'
 
-const Template = require('../../lib/template')
-const Block = require('../block')
+import Template from '../../lib/template'
+import Block from '../block'
 
 class CopyToClipboard extends Block {
   constructor(data) {
@@ -21,4 +21,4 @@ class CopyToClipboard extends Block {
   }
 }
 
-module.exports = CopyToClipboard
+export default CopyToClipboard

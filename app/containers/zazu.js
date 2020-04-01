@@ -1,10 +1,10 @@
-const React = require('react')
-const PropTypes = require('prop-types')
+import React from 'react'
+import PropTypes from 'prop-types'
 
-const Style = require('../components/style')
-const Search = require('../components/search')
-const Results = require('../components/results')
-const globalEmitter = require('../lib/globalEmitter')
+import Style from '../components/style'
+import Search from '../components/search'
+import Results from '../components/results'
+import globalEmitter from '../lib/globalEmitter'
 
 class Zazu extends React.Component {
   constructor(properties) {
@@ -86,4 +86,4 @@ Zazu.propTypes = {
   scopeBlock: PropTypes.func.isRequired,
 }
 
-module.exports = Zazu
+export default Zazu

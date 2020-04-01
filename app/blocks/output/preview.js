@@ -1,8 +1,8 @@
-const Block = require('../block')
-const Template = require('../../lib/template')
-const { windowHelper } = require('../../helpers/window')
-const path = require('path')
-const Screens = require('../../lib/screens')
+import Block from '../block'
+import Template from '../../lib/template'
+import { windowHelper } from '../../helpers/window'
+import path from 'path'
+import Screens from '../../lib/screens'
 
 class Preview extends Block {
   constructor(data) {
@@ -54,4 +54,4 @@ class Preview extends Block {
   }
 }
 
-module.exports = Preview
+export default Preview

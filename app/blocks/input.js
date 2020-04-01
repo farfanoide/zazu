@@ -1,9 +1,3 @@
-const RootScript = require('./input/rootScript')
-const PrefixScript = require('./input/prefixScript')
-const Keyword = require('./input/keyword')
-
-module.exports = {
-  RootScript,
-  PrefixScript,
-  Keyword,
-}
+export RootScript from './input/rootScript'
+export PrefixScript from './input/prefixScript'
+export Keyword from './input/keyword'

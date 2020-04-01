@@ -1,4 +1,4 @@
-const logger = require('../lib/logger')
+import logger from '../lib/logger'
 
 const retry = (name, func, options = {}) => {
   const retries = options.retries || 3
@@ -24,4 +24,4 @@ const retry = (name, func, options = {}) => {
   return run()
 }
 
-module.exports = retry
+export default retry

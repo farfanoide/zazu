@@ -1,5 +1,5 @@
-const { expect } = require('chai')
-const Template = require('../../../app/lib/template')
+import { expect  } from 'chai'
+import Template from '../../../app/lib/template'
 
 describe('Template', () => {
   describe('compile', () => {

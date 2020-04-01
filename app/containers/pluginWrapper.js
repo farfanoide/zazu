@@ -1,17 +1,17 @@
-const React = require('react')
-const PropTypes = require('prop-types')
+import React from 'react'
+import PropTypes from 'prop-types'
 
-const Plugin = require('../packages/plugin')
-const Theme = require('../packages/theme')
-const track = require('../lib/track')
-const globalEmitter = require('../lib/globalEmitter')
-const notification = require('../lib/notification')
-const truncateResult = require('../lib/truncateResult')
-const DatabaseWrapper = require('./databaseWrapper')
-const LoadingSpinner = require('../components/loadingSpinner.js')
-const NoPlugins = require('../components/noplugins.js')
+import Plugin from '../packages/plugin'
+import Theme from '../packages/theme'
+import track from '../lib/track'
+import globalEmitter from '../lib/globalEmitter'
+import notification from '../lib/notification'
+import truncateResult from '../lib/truncateResult'
+import DatabaseWrapper from './databaseWrapper'
+import LoadingSpinner from '../components/loadingSpinner.js'
+import NoPlugins from '../components/noplugins.js'
 
-class PluginWrapper extends React.Component {
+export default class PluginWrapper extends React.Component {
   constructor(properties, context) {
     super(properties, context)
 
@@ -236,5 +236,3 @@ PluginWrapper.contextTypes = {
   configuration: PropTypes.object.isRequired,
   logger: PropTypes.object.isRequired,
 }
-
-module.exports = PluginWrapper

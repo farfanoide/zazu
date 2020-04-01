@@ -1,8 +1,8 @@
-const React = require('react')
-const PropTypes = require('prop-types')
+import React from 'react'
+import PropTypes from 'prop-types'
 
-const configuration = require('../lib/configuration')
-const logger = require('../lib/logger')
+import configuration from '../lib/configuration'
+import logger from '../lib/logger'
 
 class ConfigWrapper extends React.Component {
   getChildContext = () => {
@@ -27,4 +27,4 @@ ConfigWrapper.childContextTypes = {
   logger: PropTypes.object,
 }
 
-module.exports = ConfigWrapper
+export default ConfigWrapper

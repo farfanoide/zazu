@@ -1,5 +1,5 @@
-const Transport = require('winston-transport')
-const globalEmitter = require('./globalEmitter')
+import Transport from 'winston-transport'
+import globalEmitter from './globalEmitter'
 
 class PluginLogger extends Transport {
   constructor(options) {
@@ -35,4 +35,4 @@ class PluginLogger extends Transport {
   }
 }
 
-module.exports = PluginLogger
+export default PluginLogger

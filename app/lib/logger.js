@@ -1,10 +1,10 @@
-const RotateTransport = require('winston-daily-rotate-file')
-const winston = require('winston')
-const jetpack = require('fs-jetpack')
-const util = require('util')
+import RotateTransport from 'winston-daily-rotate-file'
+import winston from 'winston'
+import jetpack from 'fs-jetpack'
+import util from 'util'
 
-const configuration = require('./configuration')
-const environment = require('./environment')
+import configuration from './configuration'
+import environment from './environment'
 
 jetpack.dir(configuration.logDir)
 
@@ -17,7 +17,7 @@ const transports = [
 ]
 
 if (environment.isRenderer) {
-  const PluginTransport = require('./pluginTransport')
+  const PluginTransport = require('./pluginTransport').default
   transports.push(new PluginTransport({}))
 }
 
@@ -44,4 +44,4 @@ logger.error = (message, error) => {
   logger.log('error', message, { error: util.inspect(error) })
 }
 
-module.exports = logger
+export default logger

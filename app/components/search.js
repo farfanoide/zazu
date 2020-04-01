@@ -1,14 +1,14 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const { remote } = require('electron')
-const { Menu } = remote
+import React from 'react'
+import PropTypes from 'prop-types'
+import { remote } from 'electron'
 
-const configuration = require('../lib/configuration')
-const globalEmitter = require('../lib/globalEmitter')
-const keyboard = require('../lib/keyboard')
-const mergeUnique = require('../lib/mergeUnique')
-const { menuTemplate } = require('../helpers/menu')
-const Style = require('./style')
+import configuration from '../lib/configuration'
+import globalEmitter from '../lib/globalEmitter'
+import keyboard from '../lib/keyboard'
+import mergeUnique from '../lib/mergeUnique'
+import { menuTemplate } from '../helpers/menu'
+import Style from './style'
+const { Menu } = remote
 
 const menu = Menu.buildFromTemplate(menuTemplate)
 
@@ -155,4 +155,4 @@ Search.propTypes = {
   handleQueryChange: PropTypes.func.isRequired,
 }
 
-module.exports = Search
+export default Search

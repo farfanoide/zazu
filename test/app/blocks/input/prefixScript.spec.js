@@ -1,5 +1,5 @@
-const { expect } = require('chai')
-const PrefixScript = require('../../../../app/blocks/input/prefixScript')
+import { expect  } from 'chai'
+import PrefixScript from '../../../../app/blocks/input/prefixScript'
 
 var prefixScript = new PrefixScript({
   prefix: 'test',

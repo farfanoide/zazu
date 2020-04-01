@@ -1,7 +1,7 @@
-const path = require('path')
-const electron = require('electron')
+import path from 'path'
+import electron from 'electron'
 
-const Block = require('../block')
+import Block from '../block'
 
 class UserScript extends Block {
   constructor(data) {
@@ -36,4 +36,4 @@ class UserScript extends Block {
   }
 }
 
-module.exports = UserScript
+export default UserScript

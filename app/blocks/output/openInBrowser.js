@@ -1,7 +1,7 @@
-const { shell } = require('electron')
+import { shell } from 'electron'
 
-const Template = require('../../lib/template')
-const Block = require('../block')
+import Template from '../../lib/template'
+import Block from '../block'
 
 class OpenInBrowser extends Block {
   constructor(data) {
@@ -19,4 +19,4 @@ class OpenInBrowser extends Block {
   }
 }
 
-module.exports = OpenInBrowser
+export default OpenInBrowser

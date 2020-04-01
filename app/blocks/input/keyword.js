@@ -1,4 +1,4 @@
-const InputBlock = require('../inputBlock')
+import InputBlock from '../inputBlock'
 
 class Keyword extends InputBlock {
   constructor(data) {
@@ -31,4 +31,4 @@ class Keyword extends InputBlock {
   }
 }
 
-module.exports = Keyword
+export default Keyword

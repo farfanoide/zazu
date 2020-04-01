@@ -1,8 +1,8 @@
-const { expect } = require('chai')
-const configuration = require('../../../app/lib/configuration')
-const jetpack = require('fs-jetpack')
-const os = require('os')
-const path = require('path')
+import { expect  } from 'chai'
+import configuration from '../../../app/lib/configuration'
+import jetpack from 'fs-jetpack'
+import os from 'os'
+import path from 'path'
 
 describe('Configuration', () => {
   beforeEach(() => {

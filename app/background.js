@@ -1,18 +1,18 @@
-const { dialog, app, globalShortcut, shell } = require('electron')
-const path = require('path')
+import { dialog, app, globalShortcut, shell } from 'electron'
+import path from 'path'
 
-const Screens = require('./lib/screens')
-const configuration = require('./lib/configuration')
-const update = require('./lib/update')
-const globalEmitter = require('./lib/globalEmitter')
-const logger = require('./lib/logger')
-const pluginFreshRequire = require('./lib/pluginFreshRequire')
+import Screens from './lib/screens'
+import configuration from './lib/configuration'
+import update from './lib/update'
+import globalEmitter from './lib/globalEmitter'
+import logger from './lib/logger'
+import pluginFreshRequire from './lib/pluginFreshRequire'
 
-const { windowHelper, openCount } = require('./helpers/window')
-const forceSingleInstance = require('./helpers/singleInstance')
-const addToStartup = require('./helpers/startup')
-const { createMenu } = require('./helpers/menu')
-const about = require('./about')
+import { windowHelper, openCount } from './helpers/window'
+import forceSingleInstance from './helpers/singleInstance'
+import addToStartup from './helpers/startup'
+import { createMenu } from './helpers/menu'
+import { show } from './about'
 
 app.allowRendererProcessReuse = true
 
@@ -33,7 +33,7 @@ globalEmitter.on('showDebug', (message) => {
 
 globalEmitter.on('showAbout', (message) => {
   logger.log('info', 'opening about page')
-  about.show()
+  show()
 })
 
 globalEmitter.on('openConfig', (message) => {

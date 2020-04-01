@@ -1,6 +1,6 @@
-const path = require('path')
-const Template = require('../../lib/template')
-const Block = require('../block')
+import path from 'path'
+import Template from '../../lib/template'
+import Block from '../block'
 
 class PlaySound extends Block {
   constructor(data) {
@@ -28,4 +28,4 @@ class PlaySound extends Block {
   }
 }
 
-module.exports = PlaySound
+export default PlaySound

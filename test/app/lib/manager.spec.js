@@ -1,5 +1,5 @@
-const { expect } = require('chai')
-const { cooldown, warmup } = require('../../../app/lib/manager')
+import { expect  } from 'chai'
+import { cooldown, warmup  } from '../../../app/lib/manager'
 
 describe('Manager', () => {
   describe('cooldown', () => {

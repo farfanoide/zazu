@@ -1,5 +1,5 @@
-const globalEmitter = require('../../lib/globalEmitter')
-const ExternalBlock = require('../externalBlock')
+import globalEmitter from '../../lib/globalEmitter'
+import ExternalBlock from '../externalBlock'
 
 class Hotkey extends ExternalBlock {
   constructor(data, options) {
@@ -23,4 +23,4 @@ class Hotkey extends ExternalBlock {
   }
 }
 
-module.exports = Hotkey
+export default Hotkey

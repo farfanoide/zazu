@@ -1,11 +1,11 @@
-const React = require('react')
-const PropTypes = require('prop-types')
-const { Markup } = require('interweave')
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Markup } from 'interweave'
 
-const keyboard = require('../lib/keyboard')
-const Result = require('./result')
-const globalEmitter = require('../lib/globalEmitter')
-const Style = require('./style')
+import keyboard from '../lib/keyboard'
+import Result from './result'
+import globalEmitter from '../lib/globalEmitter'
+import Style from './style'
 
 class Results extends React.PureComponent {
   moveUp = () => {
@@ -107,4 +107,4 @@ Results.contextTypes = {
   logger: PropTypes.object.isRequired,
 }
 
-module.exports = Results
+export default Results

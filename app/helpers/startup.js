@@ -1,9 +1,9 @@
-const AutoLaunch = require('auto-launch')
-const Datastore = require('nestdb')
-const { app } = require('electron')
-const path = require('path')
-const environment = require('../lib/environment')
-const logger = require('../lib/logger')
+import AutoLaunch from 'auto-launch'
+import Datastore from 'nestdb'
+import { app } from 'electron'
+import path from 'path'
+import environment from '../lib/environment'
+import logger from '../lib/logger'
 
 const alreadyAddedToStartup = (database) => {
   return new Promise((resolve, reject) => {
@@ -45,7 +45,7 @@ const addToStartup = () => {
   }
 }
 
-module.exports = (configuration) => {
+export default (configuration) => {
   if (environment.name !== 'production') return
   const databasePath = path.join(configuration.databaseDir, 'settings.nedb')
   const database = new Datastore({ filename: databasePath, autoload: true })

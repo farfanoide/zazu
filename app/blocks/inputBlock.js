@@ -1,7 +1,7 @@
-const Block = require('./block')
+import Block from './block'
 
-const globalEmitter = require('../lib/globalEmitter')
-const truncateResult = require('../lib/truncateResult')
+import globalEmitter from '../lib/globalEmitter'
+import truncateResult from '../lib/truncateResult'
 
 class InputBlock extends Block {
   constructor(data) {
@@ -46,4 +46,4 @@ class InputBlock extends Block {
   }
 }
 
-module.exports = InputBlock
+export default InputBlock

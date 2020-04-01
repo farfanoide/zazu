@@ -1,6 +1,6 @@
-const notification = require('../../lib/notification')
-const Template = require('../../lib/template')
-const Block = require('../block')
+import notification from '../../lib/notification'
+import Template from '../../lib/template'
+import Block from '../block'
 
 class SendNotification extends Block {
   constructor(data) {
@@ -21,4 +21,4 @@ class SendNotification extends Block {
   }
 }
 
-module.exports = SendNotification
+export default SendNotification

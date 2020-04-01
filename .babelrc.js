@@ -14,6 +14,7 @@ module.exports = {
   plugins: [
     'babel-plugin-macros',
     '@babel/plugin-syntax-dynamic-import',
+    '@babel/plugin-proposal-export-default-from',
     'dynamic-import-node-babel-7',
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-transform-react-constant-elements',

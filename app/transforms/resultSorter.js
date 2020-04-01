@@ -25,4 +25,4 @@ const resultSorter = {
   },
 }
 
-module.exports = resultSorter
+export default resultSorter

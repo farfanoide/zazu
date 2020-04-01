@@ -1,6 +1,6 @@
-const path = require('path')
+import path from 'path'
 
-module.exports = (pluginPath) => {
+export default (pluginPath) => {
   const pluginName = path.basename(pluginPath)
   Object.keys(require.cache).forEach((file) => {
     if (file.includes(pluginName)) {
