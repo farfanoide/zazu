@@ -2,6 +2,7 @@
 const { After, Before } = require('cucumber')
 const jetpack = require('fs-jetpack')
 const path = require('path')
+require('../../app/registerBabel')
 const { git } = require('../../app/lib/git')
 
 const homeDirectory = path.join(__dirname, '../../test/fixtures/home')

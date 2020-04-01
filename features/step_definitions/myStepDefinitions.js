@@ -7,10 +7,11 @@ const isTravis = require('is-travis')
 const Application = require('spectron').Application
 const $ = require('cheerio')
 const jetpack = require('fs-jetpack')
+require('../../app/registerBabel')
 const { git, clone } = require('../../app/lib/git')
 const exec = promisify(childProcess.exec)
 
-const appPath = path.join(__dirname, '../../', 'app/background.js')
+const appPath = path.join(__dirname, '../../', 'app/index.js')
 const homeDirectory = path.join(__dirname, '../../test/fixtures/home')
 const pluginDirectory = path.join(homeDirectory, '.zazu/plugins')
 const calcProfile = path.join(homeDirectory, '.calculator.zazurc.json')
