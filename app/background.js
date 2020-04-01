@@ -14,6 +14,8 @@ const addToStartup = require('./helpers/startup')
 const { createMenu } = require('./helpers/menu')
 const about = require('./about')
 
+app.allowRendererProcessReuse = true
+
 globalEmitter.on('showDebug', (message) => {
   logger.log('info', 'opening debug page')
   windowHelper('debug', {
