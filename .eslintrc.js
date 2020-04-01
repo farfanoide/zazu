@@ -8,6 +8,8 @@ module.exports = {
     'prettier/flowtype',
     'prettier/react',
     'prettier/standard',
+    'plugin:import/errors',
+    'plugin:import/warnings',
   ],
   rules: {
     'comma-dangle': [2, 'always-multiline'],
@@ -18,7 +20,7 @@ module.exports = {
       },
     ],
   },
-  plugins: ['react', 'html', 'babel', 'flowtype', 'react', 'unicorn'],
+  plugins: ['react', 'html', 'babel', 'flowtype', 'react', 'unicorn', 'import'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
