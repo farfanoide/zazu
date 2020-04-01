@@ -146,7 +146,7 @@
     "q": "^1.5.1",
     "sinon": "^9.0.1",
     "sinon-chai": "^3.5.0",
-    "spectron": "^10.0.1",
+    "spectron": "^5.0.0",
     "terser-webpack-plugin": "^2.3.5",
     "webpack": "^4.42.1",
     "webpack-bundle-analyzer": "^3.6.1",
