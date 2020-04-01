@@ -3,7 +3,6 @@
   "version": "0.6.0",
   "description": "A cross platform productivity application.",
   "scripts": {
-    "prepush": "npm run lint && npm test",
     "prerelease": "npm install",
     "build": "npm run build:js && cross-env npDEBUG=electron-builder ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true build --x64",
     "build:archlinux": "npm run build:js && cross-env DEBUG=electron-builder ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true build --x64 --linux pacman",
@@ -23,6 +22,12 @@
     "docs:publish": "gulp ghpages"
   },
   "main": "app/dist/background.prod.js",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && pretty-quick --staged",
+      "pre-push": "npm run lint && npm test"
+    }
+  },
   "build": {
     "productName": "Zazu",
     "appId": "com.tinytacoteam.zazu",
@@ -139,11 +144,12 @@
     "gh-pages": "^2.2.0",
     "gulp": "^4.0.2",
     "gulp-util": "^3.0.8",
-    "husky": "^2.4.1",
+    "husky": "^4.2.3",
     "is-travis": "^2.0.0",
     "mini-css-extract-plugin": "^0.9.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "prettier": "2.0.2",
+    "pretty-quick": "^2.0.1",
     "q": "^1.5.1",
     "rona": "^1.0.1",
     "sinon": "^9.0.1",
