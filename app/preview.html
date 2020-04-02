@@ -29,13 +29,13 @@
     <div id="resize"></div>
     <script>
       const autoSizeText = () => {
-        const el = document.getElementById('resize')
+        const element = document.querySelector('#resize')
         const resizeText = () => {
-          const currentSize = parseInt((el.style.fontSize || '150px').slice(0, -2), 10)
-          const elNewFontSize = currentSize - 1 + 'px'
-          el.style.fontSize = elNewFontSize
+          const currentSize = Number.parseInt((element.style.fontSize || '150px').slice(0, -2), 10)
+          const elementNewFontSize = currentSize - 1 + 'px'
+          element.style.fontSize = elementNewFontSize
         }
-        while (el.scrollHeight > el.offsetHeight) resizeText()
+        while (element.scrollHeight > element.offsetHeight) resizeText()
       }
 
       const electron = require('electron')
@@ -47,7 +47,7 @@
         currentWindow.close()
       })
       electron.ipcRenderer.on('message', (_, message) => {
-        document.getElementById('resize').innerText = message
+        document.querySelector('#resize').textContent = message
         autoSizeText()
         currentWindow.show()
       })
