@@ -42,6 +42,9 @@ globalEmitter.on('showAbout', (message) => {
   show()
 })
 
+globalEmitter.on('openPluginFolder', (message) => {
+  shell.openItem(configuration.pluginDir)
+})
 globalEmitter.on('openConfig', (message) => {
   shell.openItem(configuration.profilePath)
 })

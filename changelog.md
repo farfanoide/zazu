@@ -1,3 +1,9 @@
+## 0.7.0
+
+### Features
+
+- Add "Open Plugin Folder" to menu to make it easier shooting trouble
+
 ## 0.6.0
 
 ### Features

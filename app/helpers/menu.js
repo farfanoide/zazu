@@ -96,6 +96,12 @@ const trayTemplate = [
     },
   },
   {
+    label: 'Open Plugin Folder',
+    click: () => {
+      globalEmitter.emit('openPluginFolder')
+    },
+  },
+  {
     label: 'Open Config',
     click: () => {
       globalEmitter.emit('openConfig')
