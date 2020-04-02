@@ -16,11 +16,11 @@ export default merge.smart(baseConfig, {
 
   target: 'electron-main',
 
-  entry: './app/background.js',
+  entry: './app/main/index.js',
 
   output: {
     path: path.join(__dirname, '..', 'app/dist'),
-    filename: 'background.prod.js',
+    filename: 'main.production.js',
   },
 
   optimization: {

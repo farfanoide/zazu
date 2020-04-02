@@ -1,2 +1,2 @@
 require('./registerBabel')
-require('./background')
+require('./main')

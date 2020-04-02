@@ -7,6 +7,10 @@ import webpack from 'webpack'
 import { dependencies } from '../package.json'
 
 export default {
+  target: 'electron-main',
+
+  entry: './app/main/index.js',
+
   externals: [...Object.keys(dependencies || {})],
 
   module: {
