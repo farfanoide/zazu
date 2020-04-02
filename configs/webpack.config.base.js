@@ -9,14 +9,14 @@ import { dependencies } from '../package.json'
 export default {
   target: 'electron-main',
 
-  entry: './app/main/index.js',
+  entry: './app/main/index.ts',
 
   externals: [...Object.keys(dependencies || {})],
 
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(j|t)sx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -38,7 +38,7 @@ export default {
    * Determine the array of extensions that should be used to resolve modules.
    */
   resolve: {
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: ['.tsx', '.ts', '.js', '.jsx', '.json'],
   },
 
   plugins: [

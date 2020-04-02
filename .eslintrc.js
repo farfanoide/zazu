@@ -1,18 +1,21 @@
 module.exports = {
-  parser: 'babel-eslint',
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    project: ['tsconfig.eslint.json'],
+    sourceType: 'module',
+  },
   extends: [
     'eslint:recommended',
     'standard',
     'plugin:react/recommended',
     'plugin:unicorn/recommended',
-    'plugin:flowtype/recommended',
     'prettier',
-    'prettier/flowtype',
     'prettier/react',
     'prettier/standard',
     'prettier/unicorn',
     'plugin:import/errors',
     'plugin:import/warnings',
+    'plugin:import/typescript',
   ],
   rules: {
     'comma-dangle': [2, 'always-multiline'],
@@ -23,7 +26,7 @@ module.exports = {
       },
     ],
   },
-  plugins: ['react', 'html', 'babel', 'flowtype', 'react', 'unicorn', 'import'],
+  plugins: ['@typescript-eslint/eslint-plugin', 'react', 'html', 'babel', 'react', 'unicorn', 'import'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -32,6 +35,11 @@ module.exports = {
   settings: {
     react: {
       version: '16.13.1',
+    },
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
     },
   },
   globals: {
