@@ -1,3 +1,4 @@
+// @flow
 import { dialog, app, globalShortcut, shell } from 'electron'
 import path from 'path'
 

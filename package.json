@@ -20,7 +20,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier . --write",
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "concurrently \"electron-builder install-app-deps\" \"flow-typed install\""
   },
   "main": "app/dist/main.production.js",
   "husky": {
@@ -154,6 +154,8 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-standard": "4.0.1",
     "eslint-plugin-unicorn": "^18.0.1",
+    "flow-bin": "^0.121.0",
+    "flow-typed": "^3.1.0",
     "gh-pages": "^2.2.0",
     "gulp": "^4.0.2",
     "gulp-util": "^3.0.8",

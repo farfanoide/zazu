@@ -1,0 +1,16 @@
+[include]
+./app/
+./configs/
+./features/
+./tasks/
+./test/
+
+[libs]
+
+[options]
+emoji=true
+esproposal.decorators=ignore
+esproposal.export_star_as=enable
+esproposal.optional_chaining=enable
+esproposal.nullish_coalescing=enable
+experimental.const_params=true
