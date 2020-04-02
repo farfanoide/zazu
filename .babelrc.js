@@ -10,15 +10,31 @@ module.exports = {
       },
     ],
     '@babel/preset-react',
+    '@babel/preset-flow',
   ],
   plugins: [
+    // utils
+    'babel-plugin-array-last-index',
     'babel-plugin-macros',
-    '@babel/plugin-syntax-dynamic-import',
-    '@babel/plugin-proposal-export-default-from',
-    'dynamic-import-node-babel-7',
-    '@babel/plugin-proposal-class-properties',
+
+    // optimization
     '@babel/plugin-transform-react-constant-elements',
     '@babel/plugin-transform-react-inline-elements',
     'babel-plugin-closure-elimination',
+
+    // Stage 2
+    ['@babel/plugin-proposal-decorators', { legacy: true }],
+    '@babel/plugin-proposal-function-sent',
+    '@babel/plugin-proposal-export-default-from',
+    '@babel/plugin-proposal-export-namespace-from',
+    '@babel/plugin-proposal-numeric-separator',
+    '@babel/plugin-proposal-throw-expressions',
+
+    // Stage 3
+    'dynamic-import-node-babel-7',
+    '@babel/plugin-syntax-dynamic-import',
+    '@babel/plugin-syntax-import-meta',
+    ['@babel/plugin-proposal-class-properties', { loose: false }],
+    '@babel/plugin-proposal-json-strings',
   ],
 }
