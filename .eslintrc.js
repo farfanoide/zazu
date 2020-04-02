@@ -1,13 +1,16 @@
 module.exports = {
   parser: 'babel-eslint',
   extends: [
+    'eslint:recommended',
     'standard',
     'plugin:react/recommended',
     'plugin:unicorn/recommended',
+    'plugin:flowtype/recommended',
     'prettier',
     'prettier/flowtype',
     'prettier/react',
     'prettier/standard',
+    'prettier/unicorn',
     'plugin:import/errors',
     'plugin:import/warnings',
   ],
