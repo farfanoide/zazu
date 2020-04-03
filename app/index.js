@@ -1,2 +1,0 @@
-require('./registerBabel')
-require('./main')

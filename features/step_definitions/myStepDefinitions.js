@@ -11,7 +11,7 @@ import git from '../../app/lib/git'
 const $ = require('cheerio')
 const exec = promisify(childProcess.exec)
 
-const appPath = path.join(__dirname, '../../', 'app/index.js')
+const appPath = path.join(__dirname, '../../', 'app/dist/main.js')
 const homeDirectory = path.join(__dirname, '../../test/fixtures/home')
 const pluginDirectory = path.join(homeDirectory, '.zazu/plugins')
 const calcProfile = path.join(homeDirectory, '.calculator.zazurc.json')

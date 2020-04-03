@@ -1,8 +1,8 @@
 import ReactDOM from 'react-dom'
 import React from 'react'
 
-import ConfigWrapper from './containers/configWrapper'
-import PluginWrapper from './containers/pluginWrapper'
+import ConfigWrapper from '../containers/configWrapper'
+import PluginWrapper from '../containers/pluginWrapper'
 
 const mountPoint = document.querySelector('#zazu')
 if (!mountPoint) {

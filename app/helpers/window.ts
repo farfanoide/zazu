@@ -2,14 +2,14 @@ import electron from 'electron'
 import globalEmitter from '../lib/globalEmitter'
 const { BrowserWindow } = process.type === 'renderer' ? electron.remote : electron
 
-const autoResize = (dynamicWindow) => {
+const autoResize = (dynamicWindow: electron.BrowserWindow) => {
   const defaultSize = {
     width: dynamicWindow.getSize()[0],
     height: dynamicWindow.getSize()[1],
   }
 
   let currentHeight = defaultSize.height
-  const resize = (height) => {
+  const resize = (height: number) => {
     if (height !== currentHeight) {
       currentHeight = height
       dynamicWindow.setSize(defaultSize.width, height)
@@ -20,12 +20,16 @@ const autoResize = (dynamicWindow) => {
     if (!dynamicWindow) {
       return
     }
-    dynamicWindow.webContents.executeJavaScript('document.body.children[0].offsetHeight', (mainContentHeight) => {
-      resize(mainContentHeight)
-    })
+    dynamicWindow.webContents.executeJavaScript(
+      'document.body.children[0].offsetHeight',
+      false,
+      (mainContentHeight) => {
+        resize(mainContentHeight)
+      },
+    )
   }
 
-  let updateHeightIntervalId = null
+  let updateHeightIntervalId: NodeJS.Timeout | null = null
   const clearUpdateHeightInterval = () => {
     if (updateHeightIntervalId) {
       clearInterval(updateHeightIntervalId)
@@ -48,7 +52,7 @@ const autoResize = (dynamicWindow) => {
     dynamicWindow.on('closed', clearUpdateHeightInterval)
     dynamicWindow.on('hide', clearUpdateHeightInterval)
 
-    // reregister the interval as soon as the window is visible
+    // re-register the interval as soon as the window is visible
     dynamicWindow.on('show', () => {
       registerUpdateHeightInterval()
     })
@@ -58,7 +62,7 @@ const autoResize = (dynamicWindow) => {
   })
 }
 
-const namedWindows = {}
+const namedWindows: { [windowName: string]: electron.BrowserWindow | null } = {}
 
 export const openCount = () => {
   return Object.keys(namedWindows).reduce((memo, windowName) => {
@@ -71,23 +75,29 @@ export const openCount = () => {
   }, 0)
 }
 
-export const windowHelper = (name, options) => {
-  if (namedWindows[name]) {
-    namedWindows[name].focus()
-    return namedWindows[name]
+interface IExtraOptions {
+  autoResize?: boolean
+  url: string
+}
+export const windowHelper = (name: string, options: electron.BrowserWindowConstructorOptions & IExtraOptions) => {
+  const namedWindow = namedWindows[name]
+  if (namedWindow) {
+    namedWindow.focus()
+    return namedWindow
   }
 
-  namedWindows[name] = new BrowserWindow(options)
+  const newWindow = new BrowserWindow(options)
+  namedWindows[name] = newWindow
   if (options.autoResize) {
-    autoResize(namedWindows[name])
+    autoResize(newWindow)
   }
 
-  namedWindows[name].on('closed', () => {
+  newWindow.on('closed', () => {
     namedWindows[name] = null
     globalEmitter.emit('debuggerClosed')
   })
 
-  namedWindows[name].loadURL(options.url)
+  newWindow.loadURL(options.url)
 
-  return namedWindows[name]
+  return newWindow
 }

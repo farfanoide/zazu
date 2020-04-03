@@ -18,12 +18,12 @@ export default merge.smart(baseConfig, {
 
   target: 'electron-renderer',
 
-  entry: path.join(__dirname, '..', 'app', 'debug.tsx'),
+  entry: path.join(__dirname, '..', 'app', 'renderer', 'debug.tsx'),
 
   output: {
     path: path.join(__dirname, '..', 'app/dist'),
     publicPath: './dist/',
-    filename: 'debug.production.js',
+    filename: 'debug.js',
   },
 
   module: {

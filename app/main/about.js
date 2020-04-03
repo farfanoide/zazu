@@ -1,5 +1,5 @@
 import { app, clipboard, dialog } from 'electron'
-import environment from './lib/environment'
+import environment from '../lib/environment'
 
 const items = [
   { name: 'App Environment', value: environment.name },

@@ -14,7 +14,7 @@ import baseConfig from './webpack.config.base'
 export default merge.smart(baseConfig, {
   devtool: 'source-map',
 
-  mode: 'production',
+  mode: 'development',
 
   target: 'electron-renderer',
 
@@ -191,11 +191,11 @@ export default merge.smart(baseConfig, {
      * Useful for allowing different behaviour between development builds and
      * release builds
      *
-     * NODE_ENV should be production so that modules do not perform certain
+     * NODE_ENV should be development so that modules do not perform certain
      * development checks
      */
     new webpack.EnvironmentPlugin({
-      NODE_ENV: 'production',
+      NODE_ENV: 'development',
     }),
 
     new MiniCssExtractPlugin({

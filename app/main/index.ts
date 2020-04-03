@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { dialog, app, globalShortcut, shell } from 'electron'
 import path from 'path'
 
@@ -12,7 +13,7 @@ import { windowHelper, openCount } from '../helpers/window'
 import forceSingleInstance from '../helpers/singleInstance'
 import addToStartup from '../helpers/startup'
 import { createMenu } from '../helpers/menu'
-import { show } from '../about'
+import { show } from './about'
 
 app.allowRendererProcessReuse = true
 
@@ -23,7 +24,7 @@ globalEmitter.on('showDebug', (message) => {
     height: 400,
     resizable: true,
     title: 'Debug Zazu',
-    url: path.join('file://', __dirname, '..', '/debug.html'),
+    url: path.join('file://', __dirname, '../renderer', '/debug.html'),
     webPreferences: {
       nodeIntegration: true,
     },
@@ -53,7 +54,7 @@ globalEmitter.on('pluginFreshRequire', (pluginPath) => {
 
 globalEmitter.on('quit', () => app.quit())
 
-app.on('ready', function () {
+app.on('ready', () => {
   if (!configuration.load()) {
     return dialog.showMessageBox(
       {
@@ -116,7 +117,7 @@ app.on('ready', function () {
     fullscreenable: false,
     title: 'Zazu',
     autoResize: true,
-    url: path.join('file://', __dirname, '..', '/app.html'),
+    url: path.join('file://', __dirname, '../renderer', '/app.html'),
     webPreferences: {
       backgroundThrottling: false,
       nodeIntegration: true,
