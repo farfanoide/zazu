@@ -8,7 +8,7 @@
     "test": "npm run build:development:main && cross-env NODE_ENV=test electron-mocha ./app/dist/main.js --main app/registerBabel.js --recursive test/app",
     "build": "npm run build:production:js && cross-env npDEBUG=electron-builder ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true electron-builder --x64",
     "docs:publish": "gulp ghpages",
-    "cucumber": "npm run build:development:main && cucumber-js --require-module @babel/register --format node_modules/cucumber-pretty --name 'Update plugin'",
+    "cucumber": "npm run build:development:js && cucumber-js --require-module @babel/register --format node_modules/cucumber-pretty",
     "build:archlinux": "npm run build:production:js && cross-env DEBUG=electron-builder ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true electron-builder --x64 --linux pacman",
     "release:win": "npm run build:production:js && cross-env DEBUG=electron-builder ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true electron-builder --x64 --win --publish onTag",
     "release:linux": "npm run build:production:js && cross-env DEBUG=electron-builder ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES=true electron-builder --x64 --linux --publish onTag",
