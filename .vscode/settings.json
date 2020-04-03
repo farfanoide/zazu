@@ -12,6 +12,7 @@
     "minimizable",
     "nestdb",
     "nsis",
+    "nullish",
     "osx",
     "pacman",
     "prepush",
@@ -19,6 +20,7 @@
     "resources",
     "spectron",
     "tinytacoteam",
+    "typesync",
     "zazu",
     "zazurc"
   ]
