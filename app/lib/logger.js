@@ -10,7 +10,7 @@ jetpack.dir(configuration.logDir)
 
 const transports = [
   new RotateTransport({
-    filename: 'zazu.log',
+    filename: 'zazu.%DATE%.log',
     dirname: configuration.logDir,
     maxFiles: 3,
   }),
