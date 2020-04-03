@@ -5,7 +5,6 @@ import path from 'path'
 import Datastore from 'nestdb'
 
 import Zazu from './zazu'
-import track from '../lib/track'
 import resultSorter from '../transforms/resultSorter'
 
 export default class DatabaseWrapper extends React.Component {
@@ -30,9 +29,6 @@ export default class DatabaseWrapper extends React.Component {
   }
 
   trackClick = (clickedResult) => {
-    track.addPageAction('clickedResult', {
-      pluginName: clickedResult.pluginName,
-    })
     this.setState({
       clickedResults: [...this.state.clickedResults].concat(clickedResult),
     })

@@ -17,7 +17,6 @@ import { Hotkey, ServiceScript } from '../blocks/external'
 
 import npmInstall from '../lib/npmInstall'
 import notification from '../lib/notification'
-import track from '../lib/track'
 import globalEmitter from '../lib/globalEmitter'
 
 import Package from './package'
@@ -170,9 +169,8 @@ class Plugin extends Package {
     const promises = previousBlock.connections.map((blockId) => {
       const nextBlock = this.blocksById[blockId]
       const nextState = Object.assign({}, state, { blockId })
-      const tracer = track.tracer(this.id + '/' + nextBlock.id)
       nextState.next = this.next.bind(this, nextState)
-      return nextBlock.call(nextState, this.options).then(tracer.complete).catch(tracer.error)
+      return nextBlock.call(nextState, this.options)
     })
     return Promise.all(promises)
   }
@@ -210,14 +208,11 @@ class Plugin extends Package {
         return promiseList
       }
       const blockId = input.id
-      const tracer = track.tracer(this.id + '/' + blockId)
       const inputPromise = input
         .search(inputText, this.options)
         .then((results) => {
           return this.transformResults(blockId, results)
         })
-        .then(tracer.complete)
-        .catch(tracer.error)
       promiseList[blockId] = inputPromise
       return promiseList
     }, {})

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import Plugin from '../packages/plugin'
 import Theme from '../packages/theme'
-import track from '../lib/track'
 import globalEmitter from '../lib/globalEmitter'
 import notification from '../lib/notification'
 import truncateResult from '../lib/truncateResult'
@@ -97,10 +96,6 @@ export default class PluginWrapper extends React.Component {
     const theme = new Theme(configuration.theme, configuration.pluginDir)
     return theme.load().then(() => {
       this.setState({ theme })
-      track.addPageAction('loadedPackage', {
-        packageType: 'theme',
-        packageName: theme.url,
-      })
     })
   }
 
@@ -125,10 +120,6 @@ export default class PluginWrapper extends React.Component {
             const loaded = this.state.loaded + 1
             this.setState({
               loaded,
-            })
-            track.addPageAction('loadedPackage', {
-              packageType: 'plugin',
-              packageName: pluginObject.id,
             })
           },
           (reason) => {
@@ -194,16 +185,7 @@ export default class PluginWrapper extends React.Component {
 
   handleResultClick = (result) => {
     this.context.logger.log('info', 'actioned result', truncateResult(result))
-    const interaction = track.interaction()
-    interaction.setName('actioned')
-    result
-      .next()
-      .then(() => {
-        interaction.save()
-      })
-      .catch(() => {
-        interaction.save()
-      })
+    result.next()
   }
 
   render() {
